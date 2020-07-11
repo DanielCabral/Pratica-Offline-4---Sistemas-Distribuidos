@@ -37,7 +37,7 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-	public static void caixaDeInformacao(String titulo,String cabecalho,String conteudo,int tipo) {
+	public static boolean caixaDeInformacao(String titulo,String cabecalho,String conteudo,int tipo) {
 		Alert dialogoInfo;
 		if(tipo==0) {
 			dialogoInfo= new Alert(Alert.AlertType.CONFIRMATION);
@@ -51,7 +51,8 @@ public class Main extends Application {
         dialogoInfo.setTitle(titulo);
         //dialogoInfo.setHeaderText("Esse e o cabe�alho...");
         dialogoInfo.setContentText(conteudo);
-        dialogoInfo.showAndWait();
+        return !dialogoInfo.showAndWait().get().getButtonData().toString().equals("CANCEL_CLOSE");
+        
 	}
 	public static void main(String[] args) {
 		launch(args);

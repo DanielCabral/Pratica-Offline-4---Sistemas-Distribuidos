@@ -4,6 +4,8 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
@@ -20,7 +22,7 @@
                         <SeparatorMenuItem mnemonicParsing="false" />
                      </items>
                   </Menu>
-                <Menu mnemonicParsing="false" text="Alimentos">
+                <Menu mnemonicParsing="false" onAction="#AbrirAlimentos" text="Alimentos">
                      <items>
                     <MenuItem mnemonicParsing="false" onAction="#AbrirAlimentos" text="Ver Alimentos" />
                      </items>
@@ -44,7 +46,14 @@
             </MenuBar>
          </top>
          <center>
-            <AnchorPane fx:id="anchorPane" prefHeight="467.0" prefWidth="800.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+            <AnchorPane fx:id="anchorPane" prefHeight="467.0" prefWidth="800.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="372.0" fitWidth="666.0" layoutX="107.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../res/logo_store.jpg" />
+                     </image>
+                  </ImageView>
+               </children></AnchorPane>
          </center>
       </BorderPane>
    </children>

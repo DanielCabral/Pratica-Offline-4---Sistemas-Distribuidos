@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="464.0" prefWidth="800.0" style="-fx-background-color: purple;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLAnchorPaneAlimentosController">
    <children>
       <SplitPane dividerPositions="0.7791164658634538" layoutX="30.0" layoutY="30.0" maxWidth="1.7976931348623157E308" orientation="VERTICAL" prefHeight="464.0" prefWidth="652.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="924.0" prefWidth="643.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="357.0" prefWidth="737.0" style="-fx-background-color: #fff;">
                <children>
-                  <TableView fx:id="tableViewAlimentos" prefHeight="184.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="tableViewAlimentos" layoutY="76.0" prefHeight="281.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="76.0">
                      <columns>
                         <TableColumn fx:id="tableColumnAlimentoNome" prefWidth="75.0" text="Nome" />
                         <TableColumn fx:id="tableColumnAlimentoPreco" prefWidth="75.0" text="Preço" />
@@ -23,15 +26,39 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
+                  <Button layoutX="575.0" layoutY="34.0" mnemonicParsing="false" onAction="#buscar" prefHeight="32.0" prefWidth="54.0" text="🔍">
+                     <font>
+                        <Font name="Arial Narrow" size="16.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="campoDePesquisa" layoutX="203.0" layoutY="31.0" prefHeight="37.0" prefWidth="356.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="19.0" layoutY="35.0" prefHeight="30.0" prefWidth="163.0" style="-fx-background-color: #fff;" text="Buscar Pelo nome:">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="77.0" prefWidth="598.0">
                <children>
                   <Pane prefHeight="100.0" prefWidth="798.0">
                      <children>
-                        <Button layoutX="489.0" layoutY="38.0" mnemonicParsing="false" onAction="#removerCliente" prefHeight="25.0" prefWidth="88.0" text="REMOVER" />
-                        <Button layoutX="355.0" layoutY="38.0" mnemonicParsing="false" onAction="#alterarCliente" prefHeight="25.0" prefWidth="88.0" text="ALTERAR" />
-                        <Button layoutX="219.0" layoutY="38.0" mnemonicParsing="false" onAction="#inserir" prefHeight="25.0" prefWidth="88.0" text="INSERIR" />
+                        <Button layoutX="477.0" layoutY="38.0" mnemonicParsing="false" onAction="#removerCliente" prefHeight="33.0" prefWidth="99.0" text="REMOVER">
+                           <font>
+                              <Font name="Arial Narrow" size="18.0" />
+                           </font></Button>
+                        <Button layoutX="344.0" layoutY="38.0" mnemonicParsing="false" onAction="#alterarCliente" prefHeight="33.0" prefWidth="99.0" text="ALTERAR">
+                           <font>
+                              <Font name="Arial Narrow" size="18.0" />
+                           </font></Button>
+                        <Button layoutX="219.0" layoutY="38.0" mnemonicParsing="false" onAction="#inserir" prefHeight="25.0" prefWidth="88.0" text="INSERIR">
+                           <font>
+                              <Font name="Arial Narrow" size="18.0" />
+                           </font></Button>
                      </children>
                   </Pane>
                </children>

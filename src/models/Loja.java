@@ -123,21 +123,96 @@ public class Loja implements LojaDistribuida, Serializable{
 		System.out.println(listaDeProdutos.size());
 		return (ArrayList<Alimento>) listaDeProdutos;
 	}
-	
 	@Override
-	public ArrayList<Produto> pesquisarProduto(String nome) throws RemoteException {
-		ArrayList<Produto> listaDeProdutos = new ArrayList<>();
-		String textoCompleto = Arquivo.lerArquivo("src/data/produtos.txt");
-		System.out.println(textoCompleto);
+	public ArrayList<Eletronico> listarEletronicos() throws RemoteException {
+		List<Eletronico> listaDeProdutos = new ArrayList<>();
+		String textoCompleto = Arquivo.lerArquivo("src/data/Eletronicos.txt");
 		json.JSONArray jA = new json.JSONArray(textoCompleto);
 		
 		for (int i = 0; i < jA.length(); i++) {
-			Produto produto = new Produto(jA.getJSONObject(i));
-			if(produto.nome.startsWith(nome)) {
-				listaDeProdutos.add(produto);
+			Eletronico produto= null;
+			
+			produto = new Eletronico(jA.getJSONObject(i));
+
+			listaDeProdutos.add(produto);
+		}
+		return (ArrayList<Eletronico>) listaDeProdutos;
+	}
+	
+	@Override
+	public ArrayList<Roupa> listarRoupas() throws RemoteException {
+		List<Roupa> listaDeProdutos = new ArrayList<>();
+		String textoCompleto = Arquivo.lerArquivo("src/data/Roupas.txt");
+		json.JSONArray jA = new json.JSONArray(textoCompleto);
+		
+		for (int i = 0; i < jA.length(); i++) {
+			Roupa produto= null;
+			
+			produto = new Roupa(jA.getJSONObject(i));
+
+			listaDeProdutos.add(produto);
+		}
+		return (ArrayList<Roupa>) listaDeProdutos;
+	}
+		
+	@Override
+	public ArrayList<Alimento> pesquisarAlimento(String nome) throws RemoteException {
+		List<Alimento> listaDeProdutos = new ArrayList<>();
+		String textoCompleto = Arquivo.lerArquivo("src/data/Alimentos.txt");
+		json.JSONArray jA = new json.JSONArray(textoCompleto);
+		
+		for (int i = 0; i < jA.length(); i++) {
+			Alimento alimento= null;
+			
+			alimento = new Alimento(jA.getJSONObject(i));
+
+			if(alimento.getNome().startsWith(nome)) {
+				System.out.println("ok");
+				listaDeProdutos.add(alimento);
 			}
 		}
-		return listaDeProdutos;
+		System.out.println(listaDeProdutos.size());
+		return (ArrayList<Alimento>) listaDeProdutos;
+	}
+	
+	@Override
+	public ArrayList<Eletronico> pesquisarEletronico(String nome) throws RemoteException {
+		List<Eletronico> listaDeProdutos = new ArrayList<>();
+		String textoCompleto = Arquivo.lerArquivo("src/data/Eletronicos.txt");
+		json.JSONArray jA = new json.JSONArray(textoCompleto);
+		
+		for (int i = 0; i < jA.length(); i++) {
+			Eletronico alimento= null;
+			
+			alimento = new Eletronico(jA.getJSONObject(i));
+
+			if(alimento.getNome().startsWith(nome)) {
+				System.out.println("ok");
+				listaDeProdutos.add(alimento);
+			}
+		}
+		System.out.println(listaDeProdutos.size());
+		return (ArrayList<Eletronico>) listaDeProdutos;
+	}
+	
+	@Override
+	public ArrayList<Roupa> pesquisarRoupa(String nome) throws RemoteException {
+		List<Roupa> listaDeProdutos = new ArrayList<>();
+		String textoCompleto = Arquivo.lerArquivo("src/data/Alimentos.txt");
+		json.JSONArray jA = new json.JSONArray(textoCompleto);
+		
+		for (int i = 0; i < jA.length(); i++) {
+			Roupa alimento= null;
+			
+			alimento = new Roupa(jA.getJSONObject(i));
+
+			if(alimento.getNome().startsWith(nome)) {
+				System.out.println("ok");
+				listaDeProdutos.add(alimento);
+			}
+		}
+		System.out.println(listaDeProdutos.size());
+		return (ArrayList<Roupa>) listaDeProdutos;
 	}
 	
 	@Override

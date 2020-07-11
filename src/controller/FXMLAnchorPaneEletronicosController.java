@@ -18,25 +18,25 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import models.Alimento;
-import models.Produto;
+import models.Eletronico;
 import server.Cliente;
-public class FXMLAnchorPaneAlimentosController {
+public class FXMLAnchorPaneEletronicosController {
 	@FXML
-    private TableView<Alimento> tableViewAlimentos;
+    private TableView<Eletronico> tableViewEletronicos;
     @FXML
-    private TableColumn<Alimento, String> tableColumnAlimentoNome;
+    private TableColumn<Eletronico, String> tableColumnEletronicoNome;
     @FXML
-    private TableColumn<Alimento, String> tableColumnAlimentoPreco;
-    @FXML private TableColumn<Alimento, String> tableColumnAlimentoPeso;
+    private TableColumn<Eletronico, String> tableColumnEletronicoPreco;
+    @FXML private TableColumn<Eletronico, String> tableColumnEletronicoMarca;
     
     @FXML private TextField campoDePesquisa;
     
-    private ArrayList<Alimento> listAlimentos;
-    private ObservableList<Alimento> observableListAlimentos;
+    private ArrayList<Eletronico> listEletronicos;
+    private ObservableList<Eletronico> observableListEletronicos;
     private Cliente c;
     
     //Selecionado
-    Alimento alimentoSelecionado;
+    Eletronico eletronicoSelecionado;
 	static Stage dialog;
     public void inserir() {
     	dialog = new Stage();
@@ -45,11 +45,11 @@ public class FXMLAnchorPaneAlimentosController {
 		Parent root;
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(FXMLAnchorPaneAlimentosController.class.getResource("/view/CadastroDeAlimento.fxml"));
+			loader.setLocation(FXMLAnchorPaneEletronicosController.class.getResource("/view/CadastroDeEletronico.fxml"));
 			root = loader.load();
 			Scene scene = new Scene(root);
 			dialog.setScene(scene);
-			CadastrarAlimentoControler controler = loader.getController();
+			CadastrarEletronicoControler controler = loader.getController();
 			controler.setCliente(c);
 			dialog.showAndWait();
 			carregarTableViewCliente();
@@ -64,26 +64,26 @@ public class FXMLAnchorPaneAlimentosController {
     	if(!campoDePesquisa.getText().equals("")) {
     		System.out.println("Pesquisando");
     		String campoTexto = ""+campoDePesquisa.getText();
-    		listAlimentos= c.pesquisarAlimento(campoTexto);
+    		listEletronicos= c.pesquisarEletronico(campoTexto);
     		carregarTableViewCliente();
     	}
     		
     }
     
     public void alterarCliente() {
-    	if (alimentoSelecionado != null) {
+    	if (eletronicoSelecionado != null) {
 			dialog = new Stage();
 			dialog.initStyle(StageStyle.UTILITY);
 			dialog.initModality(Modality.APPLICATION_MODAL);
 			Parent root;
 			try {
 				FXMLLoader loader = new FXMLLoader();
-				loader.setLocation(FXMLAnchorPaneAlimentosController.class.getResource("/view/CadastroDeAlimento.fxml"));
+				loader.setLocation(FXMLAnchorPaneEletronicosController.class.getResource("/view/CadastroDeEletronico.fxml"));
 				root = loader.load();
 				Scene scene = new Scene(root);
 				dialog.setScene(scene);
-				CadastrarAlimentoControler controler = loader.getController();
-				controler.setAlimento(alimentoSelecionado);
+				CadastrarEletronicoControler controler = loader.getController();
+				controler.setEletronico(eletronicoSelecionado);
 				dialog.showAndWait();
 				carregarTableViewCliente();
 			} catch (IOException e) {
@@ -94,17 +94,16 @@ public class FXMLAnchorPaneAlimentosController {
     }
     
     public void removerCliente() throws RemoteException {
-    	if(alimentoSelecionado!=null) {
+    	if(eletronicoSelecionado != null) {
     		boolean apagar = Main.caixaDeInformacao("Confirmação", "", "Tem certeza que deseja remover?", 0);
 				if(apagar) {
-	    		boolean apagou = c.apagarProduto(alimentoSelecionado.getCodigo(), "Alimento");
+	    		boolean apagou = c.apagarProduto(eletronicoSelecionado.getCodigo(), "Eletronico");
 				if(apagou) {
 					Main.caixaDeInformacao("Remoção Realizada", "Removido!", "Alimento Removido", 0);
 				}
 				carregarTableViewCliente();
 			}
 		}
-        
     }
 		
 	@FXML
@@ -114,26 +113,26 @@ public class FXMLAnchorPaneAlimentosController {
 		
         carregarTableViewCliente();
 
-        tableViewAlimentos.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> selecionarItemTableViewAlimentos(newValue));
+        tableViewEletronicos.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> selecionarItemTableViewEletronicos(newValue));
 
     }
 
-	public Alimento selecionarItemTableViewAlimentos(Alimento newValue){
-        alimentoSelecionado=newValue;
+	public Alimento selecionarItemTableViewEletronicos(Eletronico newValue){
+        eletronicoSelecionado = newValue;
         
         return null;
     }
 
 	public void carregarTableViewCliente() throws RemoteException {
-        tableColumnAlimentoNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        tableColumnAlimentoPreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
-        tableColumnAlimentoPeso.setCellValueFactory(new PropertyValueFactory<>("peso"));
+        tableColumnEletronicoNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        tableColumnEletronicoPreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
+        tableColumnEletronicoMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
 
-        listAlimentos = c.listarAlimento();
-
-        observableListAlimentos = FXCollections.observableArrayList(listAlimentos);
-        tableViewAlimentos.setItems(observableListAlimentos);
+        listEletronicos = c.listarEletronico();
+        System.out.println(listEletronicos.size());
+        observableListEletronicos = FXCollections.observableArrayList(listEletronicos);
+        tableViewEletronicos.setItems(observableListEletronicos);
     }
 	
 	

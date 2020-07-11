@@ -21,7 +21,6 @@ public static String lerArquivo(String caminho) {
 		do {
 			linha = br.readLine();
 			if (linha != null) {
-				System.out.println("Leu = " + linha);
 				textoCompleto = textoCompleto + " " + linha;
 			}
 		} while (linha != null);

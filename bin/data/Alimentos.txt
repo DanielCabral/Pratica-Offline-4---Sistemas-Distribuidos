@@ -1,1 +1,1 @@
-[{"preco":20.5,"codigo":"f1c9e8a0a8234e6294e685b1a4d0a992","peso":5,"tipoDeProduto":"Alimento","nome":"Feijão"},{"preco":20.5,"codigo":"16ce69f4dadb4c7b8dad227180b89599","peso":5,"tipoDeProduto":"Alimento","nome":"Arroz"}]
+[{"preco":20.5,"codigo":"f1c9e8a0a8234e6294e685b1a4d0a992","peso":5,"tipoDeProduto":"Alimento","nome":"Feijão"},{"preco":2.49,"codigo":"def02fb1a0314adf92ecb0fe148cdf73","peso":1,"tipoDeProduto":"Alimento","nome":"Farinha"},{"preco":20.5,"codigo":"32f56d99124349bc8a87760f78b25887","peso":5,"tipoDeProduto":"Alimento","nome":"Arroz"}]

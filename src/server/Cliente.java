@@ -1,6 +1,7 @@
 package server;
 
 
+import java.awt.Robot;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -10,8 +11,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import models.Alimento;
+import models.Eletronico;
 import models.LojaDistribuida;
 import models.Produto;
+import models.Roupa;
 
 public class Cliente {
 	private static String nomeServidor = "127.0.0.1";
@@ -31,13 +34,42 @@ public class Cliente {
 		}
 	}
 	
-	public ArrayList<Produto> pesquisarProduto(String tipo) throws RemoteException {
-		return stub.listarProdutos(tipo);
+	public boolean adicionarProduto (String nome, String tipoDeProduto, double preco,double peso, String marca, String tamanho) throws RemoteException{
+		return stub.adicionarProduto(nome, tipoDeProduto, preco, peso, marca, tamanho);
+	}
+	
+	public boolean apagarProduto (String codigo, String tipoDeProduto) throws RemoteException{
+		return stub.apagarProduto(codigo, tipoDeProduto);
+	}
+	
+	public boolean alterarProduto (String codigo, String nome, String tipoDeProduto, double preco, double peso, String marca, String tamanho) throws RemoteException{
+		return stub.alterarProduto(codigo, nome, tipoDeProduto, preco, peso, marca, tamanho);
+	}
+	
+	public ArrayList<Alimento> pesquisarAlimento(String nome) throws RemoteException {
+		return stub.pesquisarAlimento(nome);
 	}
 
 	public ArrayList<Alimento> listarAlimento() throws RemoteException {
 		return stub.listarAlimentos();
 	}
+	
+	public ArrayList<Eletronico> pesquisarEletronico(String nome) throws RemoteException {
+		return stub.pesquisarEletronico(nome);
+	}
+
+	public ArrayList<Eletronico> listarEletronico() throws RemoteException {
+		return stub.listarEletronicos();
+	}
+	
+	public ArrayList<Roupa> pesquisarRoupa(String nome) throws RemoteException {
+		return stub.pesquisarRoupa(nome);
+	}
+
+	public ArrayList<Roupa> listarARoupa() throws RemoteException {
+		return stub.listarRoupas();
+	}
+	
 	
 	public static void main(String args[]) {
 		try {

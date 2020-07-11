@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="289.0" prefWidth="307.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CadastrarAlimentoControler">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="289.0" prefWidth="307.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CadastrarEletronicoControler">
    <children>
-      <Label fx:id="labelCliente" layoutX="53.0" layoutY="14.0" text="Cadastrar Alimento">
+      <Label fx:id="labelCliente" layoutX="51.0" layoutY="14.0" text="Cadastrar Eletronico">
          <font>
             <Font size="24.0" />
          </font>
@@ -29,7 +29,7 @@
          <children>
             <TextField fx:id="nome" focusTraversable="false" layoutX="23.0" layoutY="24.0" prefHeight="30.0" prefWidth="200.0" promptText="Nome" />
             <TextField fx:id="preco" focusTraversable="false" layoutX="23.0" layoutY="63.0" prefHeight="30.0" prefWidth="200.0" promptText="Preço" />
-            <TextField fx:id="peso" focusTraversable="false" layoutX="23.0" layoutY="105.0" prefHeight="30.0" prefWidth="200.0" promptText="Peso" />
+            <TextField fx:id="marca" focusTraversable="false" layoutX="23.0" layoutY="105.0" prefHeight="30.0" prefWidth="200.0" promptText="Marca" />
          </children>
       </Pane>
    </children>

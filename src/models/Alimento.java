@@ -1,8 +1,10 @@
 package models;
 
+import java.io.Serializable;
+
 import json.JSONObject;
 
-public class Alimento extends Produto {
+public class Alimento extends Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private double peso;
 	
