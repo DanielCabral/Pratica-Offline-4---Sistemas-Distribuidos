@@ -88,7 +88,7 @@ public class FXMLAnchorPaneClientesController {
 		
 	@FXML
     public void initialize() {
-        carregarTableViewCliente();
+        //carregarTableViewCliente();
 
         //tableViewClientes.getSelectionModel().selectedItemProperty().addListener(
           //      (observable, oldValue, newValue) -> selecionarItemTableViewClientes(newValue));
@@ -104,9 +104,9 @@ public class FXMLAnchorPaneClientesController {
     }
 
 	public void carregarTableViewCliente() {
-        tableColumnClienteNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        tableColumnClienteCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
-        tableColumnClienteEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
+        //tableColumnClienteNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        //tableColumnClienteCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+        //tableColumnClienteEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
 
         //listClientes = Cliente.listar();
 

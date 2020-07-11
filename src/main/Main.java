@@ -1,10 +1,9 @@
 package main;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
@@ -17,23 +16,17 @@ public class Main extends Application {
 	public static void setPalco(Stage palco) {
 		Main.palco = palco;
 	}
-	public void start (Stage palco) {
-		setPalco(palco);
-		telaInicial();
-	}
-	
-	public static void telaInicial() {
+	@Override
+	public void start(Stage primaryStage) {
 		try {
-			Parent root = FXMLLoader.load(Main.class.getResource("/view/FXMLVBoxMain.fxml"));
-			
-			Scene scene = new Scene(root);
-			Image img=new javafx.scene.image.Image("file:icone.png");
-			palco.getIcons().add(img);
-			palco.setTitle("InfoSystem");
-			palco.setScene(scene);
-			palco.show();
-			
-		}catch (Exception e) {
+			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("/view/FXMLVBoxMain.fxml"));			
+			Scene scene = new Scene(root,600,400);
+			primaryStage.setScene(scene);
+			primaryStage.resizableProperty().setValue(Boolean.FALSE);
+			primaryStage.setTitle("Cliente");
+			primaryStage.setResizable(false);
+			primaryStage.show();
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}

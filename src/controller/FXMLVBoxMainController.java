@@ -27,8 +27,8 @@ public class FXMLVBoxMainController {
 	
 	public void abrirHome() throws IOException {
 		if (telaAtual != 2) {
-			AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FXMLAnchorPaneHome.fxml"));
-	        anchorPane.getChildren().setAll(a);
+			//AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FXMLAnchorPaneHome.fxml"));
+	        //anchorPane.getChildren().setAll(a);
 		} else {
 			System.out.println("Evitando recarregar pagina a toa");
 			
