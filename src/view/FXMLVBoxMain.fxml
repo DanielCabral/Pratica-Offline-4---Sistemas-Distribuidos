@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLVBoxMainController">
+   <children>
+      <BorderPane prefHeight="500.0" prefWidth="800.0">
+         <top>
+            <MenuBar prefHeight="4.0" prefWidth="600.0" style="-fx-padding: 6px; -fx-background-color: #00b0d9;" BorderPane.alignment="CENTER">
+              <menus>
+                  <Menu mnemonicParsing="false" onShowing="#abrirHome" text="Inicio">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Abrir" visible="false" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                     </items>
+                  </Menu>
+                <Menu mnemonicParsing="false" onShowing="#abrirClientes" text="Clientes">
+                     <items>
+                    <MenuItem mnemonicParsing="false" onAction="#abrirClientes" text="Ver" />
+                     </items>
+                </Menu>
+                  <Menu mnemonicParsing="false" onShowing="#abrirLocais" text="Local">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#abrirLocais" text="Ver Local" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" onShowing="#abrirResponsaveis" text="Responsavel">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#abrirResponsaveis" text="Ver Responsavel" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" onShowing="#abrirEquipamentos" text="Equipamento">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#abrirEquipamentos" text="Ver Equipamento" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" onAction="#abrirVendas" onShowing="#abrirVendas" text="Vendas">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#abrirEquipamentos" text="Ver Vendas" />
+                     </items>
+                  </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#help" text="About" />
+                     </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+         </top>
+         <center>
+            <AnchorPane fx:id="anchorPane" prefHeight="467.0" prefWidth="800.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </children>
+</VBox>
