@@ -3,6 +3,7 @@ package models;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 import controller.Arquivo;
 
@@ -44,14 +45,14 @@ public class Loja implements LojaDistribuida, Serializable{
 		for (Produto l : listaDeProdutos) {
 			jsArray.put(l.toJson());
 		}
-		Arquivo.gravarArquivo("src/data/"+tipoDeProduto+".txt", jsArray);
+		Arquivo.gravarArquivo("src/data/"+tipoDeProduto+"s.txt", jsArray);
 		return true;
 	}
 	
 	@Override
 	public boolean apagarProduto(String codigo, String tipoDeProduto) throws RemoteException {
 		ArrayList<Produto> listaDeProdutos = new ArrayList<>();
-		String textoCompleto = Arquivo.lerArquivo("src/data/"+tipoDeProduto+".txt");
+		String textoCompleto = Arquivo.lerArquivo("src/data/"+tipoDeProduto+"s.txt");
 		System.out.println(textoCompleto);
 		json.JSONArray jA = new json.JSONArray(textoCompleto);
 		boolean removeu = false;
@@ -78,24 +79,49 @@ public class Loja implements LojaDistribuida, Serializable{
 			for (Produto l : listaDeProdutos) {
 				jsArray.put(l.toJson());
 			}
-			Arquivo.gravarArquivo("src/data/"+tipoDeProduto+".txt", jsArray);
+			Arquivo.gravarArquivo("src/data/"+tipoDeProduto+"s.txt", jsArray);
 		}
 		return true;
 	}
 	
 	@Override
-	public ArrayList<Produto> listarProdutos() throws RemoteException {
-		ArrayList<Produto> listaDeProdutos = new ArrayList<>();
-		String textoCompleto = Arquivo.lerArquivo("src/data/produtos.txt");
+	public ArrayList<Produto> listarProdutos(String tipoDeProduto) throws RemoteException {
+		List<Produto> listaDeProdutos = new ArrayList<>();
+		String textoCompleto = Arquivo.lerArquivo("src/data/"+tipoDeProduto+"s.txt");
 		System.out.println(textoCompleto);
 		json.JSONArray jA = new json.JSONArray(textoCompleto);
 		
 		for (int i = 0; i < jA.length(); i++) {
-			Produto produto = new Produto(jA.getJSONObject(i));
+			Produto produto= null;
+			if(tipoDeProduto.equals("Alimento")) {
+				produto = new Alimento(jA.getJSONObject(i));
+			}else if(tipoDeProduto.equals("Eletronico")) {
+				produto = new Eletronico(jA.getJSONObject(i));
+			}else {
+				produto = new Roupa(jA.getJSONObject(i));
+			}
 			listaDeProdutos.add(produto);
 		}
+		System.out.println(listaDeProdutos.size());
+		return (ArrayList<Produto>) listaDeProdutos;
+	}
+	
+	@Override
+	public ArrayList<Alimento> listarAlimentos() throws RemoteException {
+		List<Alimento> listaDeProdutos = new ArrayList<>();
+		String textoCompleto = Arquivo.lerArquivo("src/data/Alimentos.txt");
+		System.out.println(textoCompleto);
+		json.JSONArray jA = new json.JSONArray(textoCompleto);
 		
-		return listaDeProdutos;
+		for (int i = 0; i < jA.length(); i++) {
+			Alimento produto= null;
+			
+			produto = new Alimento(jA.getJSONObject(i));
+
+			listaDeProdutos.add(produto);
+		}
+		System.out.println(listaDeProdutos.size());
+		return (ArrayList<Alimento>) listaDeProdutos;
 	}
 	
 	@Override

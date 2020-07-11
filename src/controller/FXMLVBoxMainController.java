@@ -13,9 +13,20 @@ public class FXMLVBoxMainController {
     private AnchorPane anchorPane;
 	private int telaAtual;
 	
-	public void abrirEquipamentos() throws IOException {
+	public void abrirHome() throws IOException {
+		if (telaAtual != 0) {
+			AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FXMLAnchorPaneEletronicos"));
+	        anchorPane.getChildren().setAll(a);
+		} else {
+			System.out.println("Evitando recarregar pagina a toa");
+			
+		}
+		telaAtual = 0;
+	}
+	
+	public void AbrirAlimentos() throws IOException {
 		if (telaAtual != 1) {
-			AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FXMLAnchorPaneEquipamentos.fxml"));
+			AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FXMLAnchorPaneAlimentos.fxml"));
 	        anchorPane.getChildren().setAll(a);
 		} else {
 			System.out.println("Evitando recarregar pagina a toa");
@@ -25,19 +36,19 @@ public class FXMLVBoxMainController {
         
 	}
 	
-	public void abrirHome() throws IOException {
+	public void AbrirEletronicos() throws IOException {
 		if (telaAtual != 2) {
-			//AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FXMLAnchorPaneHome.fxml"));
-	        //anchorPane.getChildren().setAll(a);
+			AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FXMLAnchorPaneEletronicos"));
+	        anchorPane.getChildren().setAll(a);
 		} else {
 			System.out.println("Evitando recarregar pagina a toa");
 			
 		}
 		telaAtual = 2;
 	}
-	public void abrirLocais() throws IOException {
+	public void AbrirRoupas() throws IOException {
 		if (telaAtual != 3) {
-			AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FXMLAnchorPaneLocais.fxml"));
+			AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FXMLAnchorPaneRoupas"));
 	        anchorPane.getChildren().setAll(a);
 		} else {
 			System.out.println("Evitando recarregar pagina a toa");
@@ -46,39 +57,11 @@ public class FXMLVBoxMainController {
 		telaAtual = 3;
         
 	}
-	public void abrirResponsaveis() throws IOException {
-		if (telaAtual != 4) {
-			AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FXMLAnchorPaneResponsaveis.fxml"));
-	        anchorPane.getChildren().setAll(a);
-		} else {
-			System.out.println("Evitando recarregar pagina a toa");
-			
-		}
-		telaAtual = 4;
-        
-	}
+	
 	public void abrirClientes() throws IOException {
-		if (telaAtual != 5) {
-			AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FXMLAnchorPaneClientes.fxml"));
-	        anchorPane.getChildren().setAll(a);
-		} else {
-			System.out.println("Evitando recarregar pagina a toa");
-			
-		}
-		telaAtual = 5;
-        
+		
 	}
-	public void abrirVendas() throws IOException {
-		if (telaAtual != 6) {
-			AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/FXMLAnchorPaneVendas.fxml"));
-	        anchorPane.getChildren().setAll(a);
-		} else {
-			System.out.println("Evitando recarregar pagina a toa");
-			
-		}
-		telaAtual = 6;
-        
-	}
+	
 	public void help(){
 		Desktop desktop = Desktop.getDesktop();
         try {
@@ -89,7 +72,7 @@ public class FXMLVBoxMainController {
 	}
 	@FXML
     public void initialize()  {
-		System.out.println("Abrindo programa");
+		System.out.println("Abrindo programa cliente");
 		try {
 			abrirHome();
 		} catch (IOException e) {

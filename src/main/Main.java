@@ -1,9 +1,9 @@
 package main;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
@@ -19,8 +19,8 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("/view/FXMLVBoxMain.fxml"));			
-			Scene scene = new Scene(root,600,400);
+			Parent root = FXMLLoader.load(Main.class.getResource("/view/FXMLVBoxMain.fxml"));			
+			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.resizableProperty().setValue(Boolean.FALSE);
 			primaryStage.setTitle("Cliente");

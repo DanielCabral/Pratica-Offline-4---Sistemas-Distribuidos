@@ -1,1 +1,1 @@
-[]
+[{"preco":20.5,"codigo":"f1c9e8a0a8234e6294e685b1a4d0a992","peso":5,"tipoDeProduto":"Alimento","nome":"Feijão"},{"preco":20.5,"codigo":"16ce69f4dadb4c7b8dad227180b89599","peso":5,"tipoDeProduto":"Alimento","nome":"Arroz"}]

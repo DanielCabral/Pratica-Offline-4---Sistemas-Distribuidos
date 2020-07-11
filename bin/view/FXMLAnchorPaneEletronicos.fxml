@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="464.0" prefWidth="800.0" style="-fx-background-color: purple;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLAnchorPaneClientesController">
+<AnchorPane prefHeight="464.0" prefWidth="800.0" style="-fx-background-color: purple;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLAnchorPaneAlimentosController">
    <children>
       <SplitPane dividerPositions="0.7791164658634538" layoutX="30.0" layoutY="30.0" maxWidth="1.7976931348623157E308" orientation="VERTICAL" prefHeight="464.0" prefWidth="652.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>

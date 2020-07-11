@@ -1,1 +1,1 @@
-[]
+[{"preco":23.5,"codigo":"98f044145f0e460b87124645b7725962","tipoDeProduto":"Eletronico","nome":"Furadeira Eletrica Skill"},{"preco":20.5,"marca":"Skill","codigo":"471f56b054744abaa8aeac6e266dcff4","tipoDeProduto":"Eletronico","nome":"Furadeira Eletrica Skill Azul"}]

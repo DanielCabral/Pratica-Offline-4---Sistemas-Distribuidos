@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -11,41 +8,31 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLVBoxMainController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLVBoxMainController">
    <children>
       <BorderPane prefHeight="500.0" prefWidth="800.0">
          <top>
             <MenuBar prefHeight="4.0" prefWidth="600.0" style="-fx-padding: 6px; -fx-background-color: #00b0d9;" BorderPane.alignment="CENTER">
               <menus>
-                  <Menu mnemonicParsing="false" onShowing="#abrirHome" text="Inicio">
+                  <Menu mnemonicParsing="false" onShowing="#abrirHome" text="Início">
                      <items>
                         <MenuItem mnemonicParsing="false" text="Abrir" visible="false" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                      </items>
                   </Menu>
-                <Menu mnemonicParsing="false" onShowing="#abrirClientes" text="Clientes">
+                <Menu mnemonicParsing="false" text="Alimentos">
                      <items>
-                    <MenuItem mnemonicParsing="false" onAction="#abrirClientes" text="Ver" />
+                    <MenuItem mnemonicParsing="false" onAction="#AbrirAlimentos" text="Ver Alimentos" />
                      </items>
                 </Menu>
-                  <Menu mnemonicParsing="false" onShowing="#abrirLocais" text="Local">
+                  <Menu mnemonicParsing="false" text="Eletrônicos">
                      <items>
-                        <MenuItem mnemonicParsing="false" onAction="#abrirLocais" text="Ver Local" />
+                        <MenuItem mnemonicParsing="false" onAction="#AbrirEletronicos" text="Ver Eletrônicos" />
                      </items>
                   </Menu>
-                  <Menu mnemonicParsing="false" onShowing="#abrirResponsaveis" text="Responsavel">
+                  <Menu mnemonicParsing="false" text="Roupas">
                      <items>
-                        <MenuItem mnemonicParsing="false" onAction="#abrirResponsaveis" text="Ver Responsavel" />
-                     </items>
-                  </Menu>
-                  <Menu mnemonicParsing="false" onShowing="#abrirEquipamentos" text="Equipamento">
-                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#abrirEquipamentos" text="Ver Equipamento" />
-                     </items>
-                  </Menu>
-                  <Menu mnemonicParsing="false" onAction="#abrirVendas" onShowing="#abrirVendas" text="Vendas">
-                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#abrirEquipamentos" text="Ver Vendas" />
+                        <MenuItem mnemonicParsing="false" onAction="#AbrirRoupas" text="Ver Roupas" />
                      </items>
                   </Menu>
                 <Menu mnemonicParsing="false" text="Help">

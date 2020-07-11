@@ -15,8 +15,8 @@ public class Produto implements Serializable{
 	
 	public Produto(json.JSONObject j) {
 		this.nome = j.getString("nome");
-		this.codigo = j.getString("tipoDeProduto");
-		this.tipoDeProduto = j.getString("placa");
+		this.codigo = j.getString("codigo");
+		this.tipoDeProduto = j.getString("tipoDeProduto");
 		this.preco = j.getDouble("preco");
 	}
 	
