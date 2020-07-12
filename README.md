@@ -1,5 +1,5 @@
 
-<h1 align="center"><img src="https://cdn.confluent.io/wp-content/uploads/icon-stream-processing-data-collection.jpg" /></h1>
+<h1 align="center"><img src="src/res/logo_store.jpg" /></h1>
 
 
 # Prática 4 (Sistemas Distribuidos)
