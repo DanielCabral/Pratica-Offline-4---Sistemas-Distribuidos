@@ -10,6 +10,7 @@
 ![GitHub Starts](https://img.shields.io/github/stars/DanielCabral/Pratica-Offline-4---Sistemas-Distribuidos?color=15BDCA&style=for-the-badge)
 ![GitHub Size](https://img.shields.io/github/repo-size/DanielCabral/Pratica-Offline-4---Sistemas-Distribuidos?color=15BDCA&style=for-the-badge)
 ![GitHub Forks](https://img.shields.io/github/forks/DanielCabral/Pratica-Offline-4---Sistemas-Distribuidos?color=15BDCA&style=for-the-badge)
+![Tech](https://img.shields.io/static/v1?label=JAVA&message=RMI&color=15BDCA&style=for-the-badge&logo=JAVA)
 
 </h1>
 <hr>
