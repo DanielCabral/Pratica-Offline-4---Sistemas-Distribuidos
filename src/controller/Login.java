@@ -31,6 +31,8 @@ public class Login extends Application{
 			// Set the icon (must be included in the project).
 			//System.out.println(this.getClass().getResource("icone.png").toString());
 			dialog.setGraphic(new ImageView(new javafx.scene.image.Image("file:icone.png")));
+			Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+			stage.getIcons().add(new javafx.scene.image.Image("file:icone.png"));
 			// Set the button types.
 			ButtonType loginButtonType = new ButtonType("Login", ButtonData.OK_DONE);
 			dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
