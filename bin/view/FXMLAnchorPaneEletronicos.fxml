@@ -31,7 +31,7 @@
                         <Font name="Arial Narrow" size="16.0" />
                      </font>
                   </Button>
-                  <TextField fx:id="campoDePesquisa" layoutX="203.0" layoutY="31.0" prefHeight="37.0" prefWidth="356.0">
+                  <TextField fx:id="campoDePesquisa" layoutX="203.0" layoutY="31.0" onKeyReleased="#buscar" prefHeight="37.0" prefWidth="356.0">
                      <font>
                         <Font size="16.0" />
                      </font>

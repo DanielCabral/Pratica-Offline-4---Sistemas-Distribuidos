@@ -17,7 +17,7 @@ public class Servidor {
 	// Constantes que indicam onde est´a sendo executado o servi¸co de registro,
 	// qual porta e qual o nome do objeto distribu´ıdo
 	private static String nomeServidor = "127.0.0.1";
-	private static int porta = 12345;
+	private static int porta = 12344;
 	private static final String NOMEOBJDIST = "MinhaLoja";
 	public static void main(String args[]){
 		try {

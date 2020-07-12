@@ -29,7 +29,7 @@ public class Main extends Application {
 			Scene scene = new Scene(root);
 			Image img=new javafx.scene.image.Image("file:icone.png");
 			palco.getIcons().add(img);
-			palco.setTitle("InfoSystem");
+			palco.setTitle("Distributed Store");
 			palco.setScene(scene);
 			palco.show();
 			

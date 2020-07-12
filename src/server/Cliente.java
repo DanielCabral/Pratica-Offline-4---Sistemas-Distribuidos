@@ -18,7 +18,7 @@ import models.Roupa;
 
 public class Cliente {
 	private static String nomeServidor = "127.0.0.1";
-	private static int porta = 12345;
+	private static int porta = 12344;
 	private static final String NOMEOBJDIST = "MinhaLoja";
 	Registry registro;
 	LojaDistribuida stub;
@@ -66,7 +66,7 @@ public class Cliente {
 		return stub.pesquisarRoupa(nome);
 	}
 
-	public ArrayList<Roupa> listarARoupa() throws RemoteException {
+	public ArrayList<Roupa> listarRoupa() throws RemoteException {
 		return stub.listarRoupas();
 	}
 	

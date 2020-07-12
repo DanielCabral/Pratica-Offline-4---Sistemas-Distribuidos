@@ -52,6 +52,7 @@ public class FXMLAnchorPaneAlimentosController {
 			CadastrarAlimentoControler controler = loader.getController();
 			controler.setCliente(c);
 			dialog.showAndWait();
+			listAlimentos = c.listarAlimento();
 			carregarTableViewCliente();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -83,8 +84,10 @@ public class FXMLAnchorPaneAlimentosController {
 				Scene scene = new Scene(root);
 				dialog.setScene(scene);
 				CadastrarAlimentoControler controler = loader.getController();
+				controler.setCliente(c);
 				controler.setAlimento(alimentoSelecionado);
 				dialog.showAndWait();
+				listAlimentos = c.listarAlimento();
 				carregarTableViewCliente();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -101,6 +104,7 @@ public class FXMLAnchorPaneAlimentosController {
 				if(apagou) {
 					Main.caixaDeInformacao("Remoção Realizada", "Removido!", "Alimento Removido", 0);
 				}
+				listAlimentos = c.listarAlimento();
 				carregarTableViewCliente();
 			}
 		}
@@ -112,6 +116,7 @@ public class FXMLAnchorPaneAlimentosController {
 		//Inicializar classe com stub cliente
 		c =new Cliente();
 		
+        listAlimentos = c.listarAlimento();
         carregarTableViewCliente();
 
         tableViewAlimentos.getSelectionModel().selectedItemProperty().addListener(
@@ -130,7 +135,6 @@ public class FXMLAnchorPaneAlimentosController {
         tableColumnAlimentoPreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
         tableColumnAlimentoPeso.setCellValueFactory(new PropertyValueFactory<>("peso"));
 
-        listAlimentos = c.listarAlimento();
 
         observableListAlimentos = FXCollections.observableArrayList(listAlimentos);
         tableViewAlimentos.setItems(observableListAlimentos);

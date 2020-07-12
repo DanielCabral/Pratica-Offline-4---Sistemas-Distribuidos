@@ -5,6 +5,8 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.rowset.spi.SyncResolver;
+
 import controller.Arquivo;
 
 public class Loja implements LojaDistribuida, Serializable{
@@ -14,7 +16,7 @@ public class Loja implements LojaDistribuida, Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Override
-	public boolean adicionarProduto(String nome, String tipoDeProduto, double preco, double peso, String marca, String tamanho) throws RemoteException {
+	public synchronized boolean adicionarProduto(String nome, String tipoDeProduto, double preco, double peso, String marca, String tamanho) throws RemoteException {
 		ArrayList<Produto> listaDeProdutos = new ArrayList<>();
 		String textoCompleto = Arquivo.lerArquivo("src/data/"+tipoDeProduto+"s.txt");
 		
@@ -50,7 +52,7 @@ public class Loja implements LojaDistribuida, Serializable{
 	}
 	
 	@Override
-	public boolean apagarProduto(String codigo, String tipoDeProduto) throws RemoteException {
+	public synchronized boolean apagarProduto(String codigo, String tipoDeProduto) throws RemoteException {
 		ArrayList<Produto> listaDeProdutos = new ArrayList<>();
 		String textoCompleto = Arquivo.lerArquivo("src/data/"+tipoDeProduto+"s.txt");
 		System.out.println(textoCompleto);
@@ -85,7 +87,7 @@ public class Loja implements LojaDistribuida, Serializable{
 	}
 	
 	@Override
-	public ArrayList<Produto> listarProdutos(String tipoDeProduto) throws RemoteException {
+	public synchronized ArrayList<Produto> listarProdutos(String tipoDeProduto) throws RemoteException {
 		List<Produto> listaDeProdutos = new ArrayList<>();
 		String textoCompleto = Arquivo.lerArquivo("src/data/"+tipoDeProduto+"s.txt");
 		System.out.println(textoCompleto);
@@ -107,7 +109,7 @@ public class Loja implements LojaDistribuida, Serializable{
 	}
 	
 	@Override
-	public ArrayList<Alimento> listarAlimentos() throws RemoteException {
+	public synchronized ArrayList<Alimento> listarAlimentos() throws RemoteException {
 		List<Alimento> listaDeProdutos = new ArrayList<>();
 		String textoCompleto = Arquivo.lerArquivo("src/data/Alimentos.txt");
 		System.out.println(textoCompleto);
@@ -124,7 +126,7 @@ public class Loja implements LojaDistribuida, Serializable{
 		return (ArrayList<Alimento>) listaDeProdutos;
 	}
 	@Override
-	public ArrayList<Eletronico> listarEletronicos() throws RemoteException {
+	public synchronized ArrayList<Eletronico> listarEletronicos() throws RemoteException {
 		List<Eletronico> listaDeProdutos = new ArrayList<>();
 		String textoCompleto = Arquivo.lerArquivo("src/data/Eletronicos.txt");
 		json.JSONArray jA = new json.JSONArray(textoCompleto);
@@ -140,7 +142,7 @@ public class Loja implements LojaDistribuida, Serializable{
 	}
 	
 	@Override
-	public ArrayList<Roupa> listarRoupas() throws RemoteException {
+	public synchronized ArrayList<Roupa> listarRoupas() throws RemoteException {
 		List<Roupa> listaDeProdutos = new ArrayList<>();
 		String textoCompleto = Arquivo.lerArquivo("src/data/Roupas.txt");
 		json.JSONArray jA = new json.JSONArray(textoCompleto);
@@ -156,7 +158,7 @@ public class Loja implements LojaDistribuida, Serializable{
 	}
 		
 	@Override
-	public ArrayList<Alimento> pesquisarAlimento(String nome) throws RemoteException {
+	public synchronized ArrayList<Alimento> pesquisarAlimento(String nome) throws RemoteException {
 		List<Alimento> listaDeProdutos = new ArrayList<>();
 		String textoCompleto = Arquivo.lerArquivo("src/data/Alimentos.txt");
 		json.JSONArray jA = new json.JSONArray(textoCompleto);
@@ -176,7 +178,7 @@ public class Loja implements LojaDistribuida, Serializable{
 	}
 	
 	@Override
-	public ArrayList<Eletronico> pesquisarEletronico(String nome) throws RemoteException {
+	public synchronized ArrayList<Eletronico> pesquisarEletronico(String nome) throws RemoteException {
 		List<Eletronico> listaDeProdutos = new ArrayList<>();
 		String textoCompleto = Arquivo.lerArquivo("src/data/Eletronicos.txt");
 		json.JSONArray jA = new json.JSONArray(textoCompleto);
@@ -196,9 +198,9 @@ public class Loja implements LojaDistribuida, Serializable{
 	}
 	
 	@Override
-	public ArrayList<Roupa> pesquisarRoupa(String nome) throws RemoteException {
+	public synchronized ArrayList<Roupa> pesquisarRoupa(String nome) throws RemoteException {
 		List<Roupa> listaDeProdutos = new ArrayList<>();
-		String textoCompleto = Arquivo.lerArquivo("src/data/Alimentos.txt");
+		String textoCompleto = Arquivo.lerArquivo("src/data/Roupas.txt");
 		json.JSONArray jA = new json.JSONArray(textoCompleto);
 		
 		for (int i = 0; i < jA.length(); i++) {
@@ -216,7 +218,7 @@ public class Loja implements LojaDistribuida, Serializable{
 	}
 	
 	@Override
-	public boolean alterarProduto(String codigo, String nome, String tipoDeProduto, double preco, double peso, String marca, String tamanho) throws RemoteException {
+	public synchronized boolean alterarProduto(String codigo, String nome, String tipoDeProduto, double preco, double peso, String marca, String tamanho) throws RemoteException {
 		ArrayList<Produto> listaDeProdutos = new ArrayList<>();
 		String textoCompleto = Arquivo.lerArquivo("src/data/"+tipoDeProduto+"s.txt");
 		System.out.println(textoCompleto);
@@ -256,7 +258,7 @@ public class Loja implements LojaDistribuida, Serializable{
 	}
 	
 	@Override
-	public int exibirQuantidade() throws RemoteException {
+	public synchronized int exibirQuantidade() throws RemoteException {
 		ArrayList<Produto> listaDeProdutos = new ArrayList<>();
 		String textoCompleto = Arquivo.lerArquivo("src/data/produtos.txt");
 		System.out.println(textoCompleto);

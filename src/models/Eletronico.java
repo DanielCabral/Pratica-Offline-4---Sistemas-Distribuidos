@@ -1,13 +1,16 @@
 package models;
 
+import java.io.Serializable;
+
 import json.JSONObject;
 
-public class Eletronico extends Produto {
-	private static final long serialVersionUID = -3601146087129783624L;
+public class Eletronico extends Produto implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private String marca;
 	
 	public Eletronico(JSONObject j) {
 		super(j);
+		this.marca = j.getString("marca");
 	}
 	
 	public Eletronico(String codigo, String nome, String tipoDeProduto, double preco, String marca) {

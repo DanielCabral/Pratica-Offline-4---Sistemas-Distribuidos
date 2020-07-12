@@ -1,1 +1,1 @@
-[]
+[{"preco":21,"codigo":"344a1a99c8974badb0f1ca784385602e","tamanho":"G","tipoDeProduto":"Roupa","nome":"Camisa Polo"},{"preco":125,"codigo":"b501470643114186b26b69f91145d22b","tamanho":"P","tipoDeProduto":"Roupa","nome":"Moleton"}]

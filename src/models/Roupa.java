@@ -10,7 +10,6 @@ public class Roupa extends Produto {
 	public Roupa(JSONObject j) {
 		super(j);
 		this.tamanho= j.getString("tamanho");
-		// TODO Auto-generated constructor stub
 	}
 	
 	

@@ -22,17 +22,17 @@
                         <SeparatorMenuItem mnemonicParsing="false" />
                      </items>
                   </Menu>
-                <Menu mnemonicParsing="false" onAction="#AbrirAlimentos" text="Alimentos">
+                <Menu mnemonicParsing="false" onAction="#AbrirAlimentos" onShowing="#AbrirAlimentos" text="Alimentos">
                      <items>
                     <MenuItem mnemonicParsing="false" onAction="#AbrirAlimentos" text="Ver Alimentos" />
                      </items>
                 </Menu>
-                  <Menu mnemonicParsing="false" text="Eletrônicos">
+                  <Menu mnemonicParsing="false" onShowing="#AbrirEletronicos" text="Eletrônicos">
                      <items>
                         <MenuItem mnemonicParsing="false" onAction="#AbrirEletronicos" text="Ver Eletrônicos" />
                      </items>
                   </Menu>
-                  <Menu mnemonicParsing="false" text="Roupas">
+                  <Menu mnemonicParsing="false" onShowing="#AbrirRoupas" text="Roupas">
                      <items>
                         <MenuItem mnemonicParsing="false" onAction="#AbrirRoupas" text="Ver Roupas" />
                      </items>

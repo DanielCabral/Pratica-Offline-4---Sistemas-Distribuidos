@@ -18,25 +18,25 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import models.Alimento;
-import models.Eletronico;
+import models.Roupa;
 import server.Cliente;
-public class FXMLAnchorPaneEletronicosController {
+public class FXMLAnchorPaneRoupasController {
 	@FXML
-    private TableView<Eletronico> tableViewEletronicos;
+    private TableView<Roupa> tableViewRoupas;
     @FXML
-    private TableColumn<Eletronico, String> tableColumnEletronicoNome;
+    private TableColumn<Roupa, String> tableColumnRoupaNome;
     @FXML
-    private TableColumn<Eletronico, String> tableColumnEletronicoPreco;
-    @FXML private TableColumn<Eletronico, String> tableColumnEletronicoMarca;
+    private TableColumn<Roupa, String> tableColumnRoupaPreco;
+    @FXML private TableColumn<Roupa, String> tableColumnRoupaTamanho;
     
     @FXML private TextField campoDePesquisa;
     
-    private ArrayList<Eletronico> listEletronicos;
-    private ObservableList<Eletronico> observableListEletronicos;
+    private ArrayList<Roupa> listRoupas;
+    private ObservableList<Roupa> observableListRoupas;
     private Cliente c;
     
     //Selecionado
-    Eletronico eletronicoSelecionado;
+    Roupa roupaSelecionada;
 	static Stage dialog;
     public void inserir() {
     	dialog = new Stage();
@@ -45,14 +45,14 @@ public class FXMLAnchorPaneEletronicosController {
 		Parent root;
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(FXMLAnchorPaneEletronicosController.class.getResource("/view/CadastroDeEletronico.fxml"));
+			loader.setLocation(FXMLAnchorPaneRoupasController.class.getResource("/view/CadastroDeRoupas.fxml"));
 			root = loader.load();
 			Scene scene = new Scene(root);
 			dialog.setScene(scene);
-			CadastrarEletronicoControler controler = loader.getController();
+			CadastrarRoupasControler controler = loader.getController();
 			controler.setCliente(c);
 			dialog.showAndWait();
-			listEletronicos = c.listarEletronico();
+			listRoupas = c.listarRoupa();
 			carregarTableViewCliente();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -65,29 +65,29 @@ public class FXMLAnchorPaneEletronicosController {
     	if(!campoDePesquisa.getText().equals("")) {
     		System.out.println("Pesquisando");
     		String campoTexto = ""+campoDePesquisa.getText();
-    		listEletronicos= c.pesquisarEletronico(campoTexto);
+    		listRoupas= c.pesquisarRoupa(campoTexto);
     		carregarTableViewCliente();
     	}
     		
     }
     
     public void alterarCliente() {
-    	if (eletronicoSelecionado != null) {
+    	if (roupaSelecionada != null) {
 			dialog = new Stage();
 			dialog.initStyle(StageStyle.UTILITY);
 			dialog.initModality(Modality.APPLICATION_MODAL);
 			Parent root;
 			try {
 				FXMLLoader loader = new FXMLLoader();
-				loader.setLocation(FXMLAnchorPaneEletronicosController.class.getResource("/view/CadastroDeEletronico.fxml"));
+				loader.setLocation(FXMLAnchorPaneRoupasController.class.getResource("/view/CadastroDeRoupas.fxml"));
 				root = loader.load();
 				Scene scene = new Scene(root);
 				dialog.setScene(scene);
-				CadastrarEletronicoControler controler = loader.getController();
+				CadastrarRoupasControler controler = loader.getController();
 				controler.setCliente(c);
-				controler.setEletronico(eletronicoSelecionado);
+				controler.setRoupa(roupaSelecionada);
 				dialog.showAndWait();
-				listEletronicos = c.listarEletronico();
+				listRoupas = c.listarRoupa();
 				carregarTableViewCliente();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -97,14 +97,14 @@ public class FXMLAnchorPaneEletronicosController {
     }
     
     public void removerCliente() throws RemoteException {
-    	if(eletronicoSelecionado != null) {
+    	if(roupaSelecionada != null) {
     		boolean apagar = Main.caixaDeInformacao("Confirmação", "", "Tem certeza que deseja remover?", 0);
 				if(apagar) {
-	    		boolean apagou = c.apagarProduto(eletronicoSelecionado.getCodigo(), "Eletronico");
+	    		boolean apagou = c.apagarProduto(roupaSelecionada.getCodigo(), "Roupa");
 				if(apagou) {
-					Main.caixaDeInformacao("Remoção Realizada", "Removido!", "Eletronico Removido", 0);
+					Main.caixaDeInformacao("Remoção Realizada", "Removido!", "Roupa Removido", 0);
 				}
-				listEletronicos = c.listarEletronico();
+				listRoupas = c.listarRoupa();
 				carregarTableViewCliente();
 			}
 		}
@@ -116,27 +116,27 @@ public class FXMLAnchorPaneEletronicosController {
 		c =new Cliente();
 		
 		
-        listEletronicos = c.listarEletronico();
+        listRoupas = c.listarRoupa();
         carregarTableViewCliente();
 
-        tableViewEletronicos.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> selecionarItemTableViewEletronicos(newValue));
+        tableViewRoupas.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> selecionarItemTableViewRoupas(newValue));
 
     }
 
-	public Alimento selecionarItemTableViewEletronicos(Eletronico newValue){
-        eletronicoSelecionado = newValue;
+	public Alimento selecionarItemTableViewRoupas(Roupa newValue){
+        roupaSelecionada = newValue;
         
         return null;
     }
 
 	public void carregarTableViewCliente() throws RemoteException {
-        tableColumnEletronicoNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        tableColumnEletronicoPreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
-        tableColumnEletronicoMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
+        tableColumnRoupaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        tableColumnRoupaPreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
+        tableColumnRoupaTamanho.setCellValueFactory(new PropertyValueFactory<>("tamanho"));
 
-        observableListEletronicos = FXCollections.observableArrayList(listEletronicos);
-        tableViewEletronicos.setItems(observableListEletronicos);
+        observableListRoupas = FXCollections.observableArrayList(listRoupas);
+        tableViewRoupas.setItems(observableListRoupas);
     }
 	
 	

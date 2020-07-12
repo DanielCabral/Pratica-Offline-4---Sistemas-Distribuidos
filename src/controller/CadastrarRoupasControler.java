@@ -8,39 +8,39 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import models.Eletronico;
+import models.Roupa;
 import server.Cliente;
 
-public class CadastrarEletronicoControler {
+public class CadastrarRoupasControler {
 
 	@FXML private TextField nome;
 	@FXML private TextField preco;
-	@FXML private TextField marca;
+	@FXML private TextField tamanho;
 	@FXML private Button botaoCadastrarOuAlterar;
 	@FXML private Label labelCliente;
 	
 	Cliente cliente;
-	Eletronico eletronico = null;
+	Roupa roupa = null;
 	
 	public void adicionarCliente() throws NumberFormatException, RemoteException {
 		if(validacaoDeEntradas()){
-			if(eletronico == null) {
-				boolean cadastrou = cliente.adicionarProduto(nome.getText(), "Eletronico", Double.parseDouble(preco.getText()), 0, marca.getText(), "");
+			if(roupa == null) {
+				boolean cadastrou = cliente.adicionarProduto(nome.getText(), "Roupa", Double.parseDouble(preco.getText()), 0, "" , tamanho.getText());
 				if(cadastrou) {
-					Main.caixaDeInformacao("Cadastro Realizado", "Sucesso!", "Eletronico cadastrado", 1);
+					Main.caixaDeInformacao("Cadastro Realizado", "Sucesso!", "Roupa cadastrada", 1);
 					Stage stage = (Stage) nome.getScene().getWindow();
 					stage.close();
 				}else {
-					Main.caixaDeInformacao("Cadastro Não Realizado", "Falha!", "Eletronico não cadastrado, dados incorretos", 2);
+					Main.caixaDeInformacao("Cadastro Não Realizado", "Falha!", "Roupa não cadastrada, dados incorretos", 2);
 				}
 			}else {
-				boolean alterou = cliente.alterarProduto(eletronico.getCodigo(), nome.getText(), "Eletronico", Double.parseDouble(preco.getText()), 0, marca.getText(), "");
+				boolean alterou = cliente.alterarProduto(roupa.getCodigo(), nome.getText(), "Roupa", Double.parseDouble(preco.getText()), 0, "", tamanho.getText());
 				if(alterou) {
-					Main.caixaDeInformacao("Alteração Realizada", "Sucesso!", "Eletronico alterado", 1);
+					Main.caixaDeInformacao("Alteração Realizada", "Sucesso!", "Roupa alterada", 1);
 					Stage stage = (Stage) nome.getScene().getWindow();
 					stage.close();
 				}else {
-					Main.caixaDeInformacao("Alteração Não Realizada", "Falha!", "Eletronico não atualizado, dados incorretos", 2);
+					Main.caixaDeInformacao("Alteração Não Realizada", "Falha!", "Roupa não atualizada, dados incorretos", 2);
 				}
 			}
 		}else {
@@ -52,12 +52,12 @@ public class CadastrarEletronicoControler {
 		this.cliente = cliente;
 	}
 
-	public void setEletronico(Eletronico eletronico) {
-		this.eletronico = eletronico;
-		nome.setText(eletronico.getNome());
-		preco.setText(eletronico.getPreco().toString());
-		marca.setText(""+eletronico.getMarca());
-		labelCliente.setText("Alterar Eletronico");
+	public void setRoupa(Roupa roupa) {
+		this.roupa = roupa;
+		nome.setText(roupa.getNome());
+		preco.setText(roupa.getPreco().toString());
+		tamanho.setText(""+roupa.getTamanho());
+		labelCliente.setText("Alterar Roupa");
 		botaoCadastrarOuAlterar.setText("Alterar");
 	}
 	
@@ -68,7 +68,7 @@ public class CadastrarEletronicoControler {
 	}
 
 	private boolean validacaoDeEntradas() {
-		if (!nome.getText().isEmpty() && !preco.getText().isEmpty() && !marca.getText().isEmpty()) {
+		if (!nome.getText().isEmpty() && !preco.getText().isEmpty() && !tamanho.getText().isEmpty()) {
 			return true;
 		} else {
 			return false;

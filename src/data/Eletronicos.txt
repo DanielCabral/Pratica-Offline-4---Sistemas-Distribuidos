@@ -1,1 +1,1 @@
-[{"preco":23.5,"codigo":"98f044145f0e460b87124645b7725962","tipoDeProduto":"Eletronico","nome":"Furadeira Eletrica Skill"},{"preco":20.5,"codigo":"471f56b054744abaa8aeac6e266dcff4","tipoDeProduto":"Eletronico","nome":"Furadeira Eletrica Skill Azul"},{"preco":200,"marca":"Nokia","codigo":"d66af2c2bed8404fbf0931b5624304c4","tipoDeProduto":"Eletronico","nome":"Celular Nokia 3100"}]
+[{"preco":3300,"marca":"Apple","codigo":"558c9e35422f43c9b72036e34915fc81","tipoDeProduto":"Eletronico","nome":"Mackbook"}]

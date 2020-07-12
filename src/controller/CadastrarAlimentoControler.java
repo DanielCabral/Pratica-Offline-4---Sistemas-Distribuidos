@@ -54,7 +54,11 @@ public class CadastrarAlimentoControler {
 
 	public void setAlimento(Alimento alimento) {
 		this.alimento = alimento;
-		
+		nome.setText(alimento.getNome());
+		preco.setText(alimento.getPreco().toString());
+		peso.setText(""+alimento.getPeso());
+		labelCliente.setText("Alterar Alimento");
+		botaoCadastrarOuAlterar.setText("Alterar");
 	}
 	
 	@FXML
