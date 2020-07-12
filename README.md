@@ -7,9 +7,9 @@
 
 <h1 align="center">
 
-![GitHub Starts](https://img.shields.io/github/stars/DanielCabral/Next-Level-Week-1?color=%237159C1&style=for-the-badge)
-![GitHub Size](https://img.shields.io/github/repo-size/DanielCabral/Next-Level-Week-1?color=%237159c1&style=for-the-badge)
-![GitHub Forks](https://img.shields.io/github/forks/DanielCabral/Next-Level-Week-1?color=%237159c1&style=for-the-badge)
+![GitHub Starts](https://img.shields.io/github/stars/DanielCabral/Pratica-Offline-4---Sistemas-Distribuidos?color=%237159C1&style=for-the-badge)
+![GitHub Size](https://img.shields.io/github/repo-size/DanielCabral/Pratica-Offline-4---Sistemas-Distribuidos?color=%237159c1&style=for-the-badge)
+![GitHub Forks](https://img.shields.io/github/forks/DanielCabral/Pratica-Offline-4---Sistemas-Distribuidos?color=%237159c1&style=for-the-badge)
 
 </h1>
 <hr>
