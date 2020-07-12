@@ -1,8 +1,10 @@
 package models;
 
+import java.io.Serializable;
+
 import json.JSONObject;
 
-public class Roupa extends Produto {
+public class Roupa extends Produto implements Serializable, Comparable<Roupa>{
 
 	private static final long serialVersionUID = 1L;
 	private String tamanho;
@@ -37,5 +39,8 @@ public class Roupa extends Produto {
 		this.tamanho = tamanho;
 	}
 	
-	
+	 @Override
+	    public int compareTo(Roupa r) {
+	        return this.nome.compareTo(r.getNome());
+	  }
 }

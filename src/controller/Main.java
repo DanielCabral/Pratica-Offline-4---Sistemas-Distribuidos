@@ -24,14 +24,20 @@ public class Main extends Application {
 	
 	public static void telaInicial() {
 		try {
-			Parent root = FXMLLoader.load(Main.class.getResource("/view/FXMLVBoxMain.fxml"));
+			Login l=new Login();
 			
-			Scene scene = new Scene(root);
-			Image img=new javafx.scene.image.Image("file:icone.png");
-			palco.getIcons().add(img);
-			palco.setTitle("Distributed Store");
-			palco.setScene(scene);
-			palco.show();
+			if(l.getLogou()) {
+				Parent root = FXMLLoader.load(Main.class.getResource("/view/FXMLVBoxMain.fxml"));
+				
+				Scene scene = new Scene(root);
+				Image img=new javafx.scene.image.Image("file:icone.png");
+				palco.getIcons().add(img);
+				palco.setTitle("Distribute Store");
+				palco.setScene(scene);
+				palco.show();
+			}else {
+				Main.caixaDeInformacao("Login não realizado", "Falha!", "Login falhou, dados incorretos", 2);
+			}
 			
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -49,7 +55,6 @@ public class Main extends Application {
 			dialogoInfo= new Alert(Alert.AlertType.ERROR);
 		}
         dialogoInfo.setTitle(titulo);
-        //dialogoInfo.setHeaderText("Esse e o cabeï¿½alho...");
         dialogoInfo.setContentText(conteudo);
         return !dialogoInfo.showAndWait().get().getButtonData().toString().equals("CANCEL_CLOSE");
         

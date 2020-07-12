@@ -3,9 +3,8 @@ package models;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-
-import javax.sql.rowset.spi.SyncResolver;
 
 import controller.Arquivo;
 
@@ -14,6 +13,42 @@ public class Loja implements LojaDistribuida, Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	public boolean adicionarUsuario(String matricula, String cpf, String nome, String salario) throws RemoteException{
+		ArrayList<Funcionario> listaDeUsuarios = new ArrayList<>();
+		String textoCompleto = Arquivo.lerArquivo("src/data/Funcionarios.txt");
+		
+		json.JSONArray jA = new json.JSONArray(textoCompleto);
+		for (int i = 0; i < jA.length(); i++) {
+			Funcionario produto= new Funcionario(jA.getJSONObject(i));
+			listaDeUsuarios.add(produto);
+		}
+		
+		Funcionario funcionario = new Funcionario(matricula, cpf, nome, salario);
+		listaDeUsuarios.add(funcionario);
+		
+		json.JSONArray jsArray = new json.JSONArray();
+		for (Funcionario l : listaDeUsuarios) {
+			jsArray.put(l.toJson());
+		}
+		Arquivo.gravarArquivo("src/data/Funcionarios.txt", jsArray);
+		
+		return true;
+	}
+	
+	public synchronized boolean logar(String matricula, String cpf) throws RemoteException {
+		String textoCompleto = Arquivo.lerArquivo("src/data/Funcionarios.txt");
+		json.JSONArray jA = new json.JSONArray(textoCompleto);
+		boolean logou = false;
+		for (int i = 0; i < jA.length(); i++) {
+			Funcionario funcionario= new Funcionario(jA.getJSONObject(i));
+			
+			if(funcionario.getMatricula().equals(matricula) && funcionario.getCpf().equals(cpf)) {
+				logou = true;
+			}
+		}
+		return logou;
+	}
 	
 	@Override
 	public synchronized boolean adicionarProduto(String nome, String tipoDeProduto, double preco, double peso, String marca, String tamanho) throws RemoteException {
@@ -31,6 +66,7 @@ public class Loja implements LojaDistribuida, Serializable{
 				produto = new Roupa(jA.getJSONObject(i));
 			}
 			listaDeProdutos.add(produto);
+			
 		}
 		
 		Produto rc;
@@ -85,29 +121,7 @@ public class Loja implements LojaDistribuida, Serializable{
 		}
 		return true;
 	}
-	
-	@Override
-	public synchronized ArrayList<Produto> listarProdutos(String tipoDeProduto) throws RemoteException {
-		List<Produto> listaDeProdutos = new ArrayList<>();
-		String textoCompleto = Arquivo.lerArquivo("src/data/"+tipoDeProduto+"s.txt");
-		System.out.println(textoCompleto);
-		json.JSONArray jA = new json.JSONArray(textoCompleto);
 		
-		for (int i = 0; i < jA.length(); i++) {
-			Produto produto= null;
-			if(tipoDeProduto.equals("Alimento")) {
-				produto = new Alimento(jA.getJSONObject(i));
-			}else if(tipoDeProduto.equals("Eletronico")) {
-				produto = new Eletronico(jA.getJSONObject(i));
-			}else {
-				produto = new Roupa(jA.getJSONObject(i));
-			}
-			listaDeProdutos.add(produto);
-		}
-		System.out.println(listaDeProdutos.size());
-		return (ArrayList<Produto>) listaDeProdutos;
-	}
-	
 	@Override
 	public synchronized ArrayList<Alimento> listarAlimentos() throws RemoteException {
 		List<Alimento> listaDeProdutos = new ArrayList<>();
@@ -122,7 +136,8 @@ public class Loja implements LojaDistribuida, Serializable{
 
 			listaDeProdutos.add(produto);
 		}
-		System.out.println(listaDeProdutos.size());
+
+		Collections.sort(listaDeProdutos);
 		return (ArrayList<Alimento>) listaDeProdutos;
 	}
 	@Override
@@ -138,6 +153,7 @@ public class Loja implements LojaDistribuida, Serializable{
 
 			listaDeProdutos.add(produto);
 		}
+		Collections.sort(listaDeProdutos);
 		return (ArrayList<Eletronico>) listaDeProdutos;
 	}
 	
@@ -154,6 +170,7 @@ public class Loja implements LojaDistribuida, Serializable{
 
 			listaDeProdutos.add(produto);
 		}
+		Collections.sort(listaDeProdutos);
 		return (ArrayList<Roupa>) listaDeProdutos;
 	}
 		
@@ -173,7 +190,7 @@ public class Loja implements LojaDistribuida, Serializable{
 				listaDeProdutos.add(alimento);
 			}
 		}
-		System.out.println(listaDeProdutos.size());
+		Collections.sort(listaDeProdutos);
 		return (ArrayList<Alimento>) listaDeProdutos;
 	}
 	
@@ -193,7 +210,7 @@ public class Loja implements LojaDistribuida, Serializable{
 				listaDeProdutos.add(alimento);
 			}
 		}
-		System.out.println(listaDeProdutos.size());
+		Collections.sort(listaDeProdutos);
 		return (ArrayList<Eletronico>) listaDeProdutos;
 	}
 	
@@ -213,7 +230,7 @@ public class Loja implements LojaDistribuida, Serializable{
 				listaDeProdutos.add(alimento);
 			}
 		}
-		System.out.println(listaDeProdutos.size());
+		Collections.sort(listaDeProdutos);
 		return (ArrayList<Roupa>) listaDeProdutos;
 	}
 	
@@ -260,13 +277,27 @@ public class Loja implements LojaDistribuida, Serializable{
 	@Override
 	public synchronized int exibirQuantidade() throws RemoteException {
 		ArrayList<Produto> listaDeProdutos = new ArrayList<>();
-		String textoCompleto = Arquivo.lerArquivo("src/data/produtos.txt");
-		System.out.println(textoCompleto);
+		String textoCompleto = Arquivo.lerArquivo("src/data/Alimentos.txt");
 		json.JSONArray jA = new json.JSONArray(textoCompleto);
 		for (int i = 0; i < jA.length(); i++) {
 			Produto produto = new Produto(jA.getJSONObject(i));
 			listaDeProdutos.add(produto);
 		}
+		
+		textoCompleto = Arquivo.lerArquivo("src/data/Eletronicos.txt");
+		jA = new json.JSONArray(textoCompleto);
+		for (int i = 0; i < jA.length(); i++) {
+			Produto produto = new Produto(jA.getJSONObject(i));
+			listaDeProdutos.add(produto);
+		}
+		
+		textoCompleto = Arquivo.lerArquivo("src/data/Roupas.txt");
+		jA = new json.JSONArray(textoCompleto);
+		for (int i = 0; i < jA.length(); i++) {
+			Produto produto = new Produto(jA.getJSONObject(i));
+			listaDeProdutos.add(produto);
+		}
+		
 		return listaDeProdutos.size();
 	}
 	

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import json.JSONObject;
 
-public class Eletronico extends Produto implements Serializable{
+public class Eletronico extends Produto implements Serializable, Comparable<Eletronico>{
 	private static final long serialVersionUID = 1L;
 	private String marca;
 	
@@ -35,5 +35,9 @@ public class Eletronico extends Produto implements Serializable{
 	public void setMarca(String marca) {
 		this.marca = marca;
 	}
-
+	
+	 @Override
+	    public int compareTo(Eletronico e) {
+	        return this.nome.compareTo(e.getNome());
+	 }
 }

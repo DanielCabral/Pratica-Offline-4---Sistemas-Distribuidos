@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import json.JSONObject;
 
-public class Alimento extends Produto implements Serializable {
+public class Alimento extends Produto implements Serializable, Comparable<Alimento>{
 	private static final long serialVersionUID = 1L;
 	private double peso;
 	
@@ -37,6 +37,9 @@ public class Alimento extends Produto implements Serializable {
 		this.peso = peso;
 	}
 
-	
+	 @Override
+	    public int compareTo(Alimento a) {
+	        return this.nome.compareTo(a.getNome());
+	    }
 
 }

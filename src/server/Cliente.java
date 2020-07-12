@@ -34,6 +34,14 @@ public class Cliente {
 		}
 	}
 	
+	public synchronized boolean logar(String matricula, String cpf) throws RemoteException{
+		return stub.logar(matricula, cpf);
+	}
+	
+	public boolean adicionarUsuario(String matricula, String cpf, String nome, String salario) throws RemoteException{
+		return stub.adicionarUsuario(matricula, cpf, nome, salario);
+	}
+	
 	public boolean adicionarProduto (String nome, String tipoDeProduto, double preco,double peso, String marca, String tamanho) throws RemoteException{
 		return stub.adicionarProduto(nome, tipoDeProduto, preco, peso, marca, tamanho);
 	}
@@ -83,7 +91,9 @@ public class Cliente {
 			
 			// Invocando m´etodos do objeto distribu´ıdo			
 					
-			System.out.println("Cadastrou: " + stub.adicionarProduto("Arroz", "Alimento", 20.5, 5, "", ""));
+			//System.out.println("Cadastrou: " + stub.adicionarProduto("Arroz", "Alimento", 20.5, 5, "", ""));
+			//System.out.println(stub.exibirQuantidade());
+			System.out.println(stub.adicionarUsuario("232", "232", "Jose", "232"));
 			
 			System.out.println("Fim da execução do cliente!"); 
 		} catch (RemoteException | NotBoundException ex) {
