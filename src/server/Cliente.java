@@ -92,8 +92,8 @@ public class Cliente {
 			// Invocando m´etodos do objeto distribu´ıdo			
 					
 			//System.out.println("Cadastrou: " + stub.adicionarProduto("Arroz", "Alimento", 20.5, 5, "", ""));
-			//System.out.println(stub.exibirQuantidade());
-			System.out.println(stub.adicionarUsuario("232", "232", "Jose", "232"));
+			System.out.println(stub.exibirQuantidade());
+			//System.out.println(stub.adicionarUsuario("232", "232", "Jose", "232"));
 			
 			System.out.println("Fim da execução do cliente!"); 
 		} catch (RemoteException | NotBoundException ex) {
