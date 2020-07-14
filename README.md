@@ -1,5 +1,5 @@
 
-<h1 align="center"><img src="https://cdn.confluent.io/wp-content/uploads/icon-stream-processing-data-collection.jpg" /></h1>
+<h1 align="center"><img src="src/res/logo_store.jpg" /></h1>
 
 
 # Prática 4 (Sistemas Distribuidos)
@@ -7,9 +7,10 @@
 
 <h1 align="center">
 
-![GitHub Starts](https://img.shields.io/github/stars/DanielCabral/Next-Level-Week-1?color=%237159C1&style=for-the-badge)
-![GitHub Size](https://img.shields.io/github/repo-size/DanielCabral/Next-Level-Week-1?color=%237159c1&style=for-the-badge)
-![GitHub Forks](https://img.shields.io/github/forks/DanielCabral/Next-Level-Week-1?color=%237159c1&style=for-the-badge)
+![GitHub Starts](https://img.shields.io/github/stars/DanielCabral/Pratica-Offline-4---Sistemas-Distribuidos?color=15BDCA&style=for-the-badge)
+![GitHub Size](https://img.shields.io/github/repo-size/DanielCabral/Pratica-Offline-4---Sistemas-Distribuidos?color=15BDCA&style=for-the-badge)
+![GitHub Forks](https://img.shields.io/github/forks/DanielCabral/Pratica-Offline-4---Sistemas-Distribuidos?color=15BDCA&style=for-the-badge)
+![Tech](https://img.shields.io/static/v1?label=JAVA&message=RMI&color=15BDCA&style=for-the-badge&logo=JAVA)
 
 </h1>
 <hr>
