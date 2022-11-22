@@ -1,1 +1,1 @@
-[{"preco":3300,"marca":"Apple","codigo":"558c9e35422f43c9b72036e34915fc81","tipoDeProduto":"Eletronico","nome":"Mackbook"}]
+[]

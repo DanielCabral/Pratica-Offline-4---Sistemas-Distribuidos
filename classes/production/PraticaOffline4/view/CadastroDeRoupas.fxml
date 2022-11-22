@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="289.0" prefWidth="307.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CadastrarRoupasControler">
+   <children>
+      <Label fx:id="labelCliente" layoutX="58.0" layoutY="14.0" text="Cadastrar Roupa">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Separator layoutX="28.0" layoutY="53.0" prefHeight="13.0" prefWidth="250.0" />
+      <Button fx:id="botaoCadastrarOuAlterar" layoutX="156.0" layoutY="245.0" mnemonicParsing="false" onAction="#adicionarCliente" text="Cadastrar" textFill="#0cc321">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="69.0" layoutY="245.0" mnemonicParsing="false" onAction="#voltar" text="Voltar" textFill="#e48226">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Pane layoutX="28.0" layoutY="73.0" prefHeight="160.0" prefWidth="250.0" style="-fx-border-style: solid;">
+         <children>
+            <TextField fx:id="tamanho" focusTraversable="false" layoutX="23.0" layoutY="105.0" prefHeight="30.0" prefWidth="200.0" promptText="Tamanho" />
+            <TextField fx:id="nome" focusTraversable="false" layoutX="23.0" layoutY="24.0" prefHeight="30.0" prefWidth="200.0" promptText="Nome" />
+            <TextField fx:id="preco" focusTraversable="false" layoutX="23.0" layoutY="63.0" prefHeight="30.0" prefWidth="200.0" promptText="Preço" />
+         </children>
+      </Pane>
+   </children>
+</Pane>

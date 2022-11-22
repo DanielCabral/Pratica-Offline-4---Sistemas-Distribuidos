@@ -1,7 +1,5 @@
 package controller;
 
-import java.rmi.RemoteException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,7 +7,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import models.Alimento;
+import models.Produto;
 import server.Cliente;
+
+import java.rmi.RemoteException;
 
 public class CadastrarAlimentoControler {
 
@@ -25,22 +26,22 @@ public class CadastrarAlimentoControler {
 	public void adicionarCliente() throws NumberFormatException, RemoteException {
 		if(validacaoDeEntradas()){
 			if(alimento == null) {
-				boolean cadastrou = cliente.adicionarProduto(nome.getText(), "Alimento", Double.parseDouble(preco.getText()), Double.parseDouble(peso.getText()), "", "");
+				boolean cadastrou = cliente.adicionarProduto(new Alimento(Produto.gerarCodigo(), nome.getText(), "Alimento", Double.parseDouble(preco.getText()), Double.parseDouble(peso.getText())));
 				if(cadastrou) {
 					Main.caixaDeInformacao("Cadastro Realizado", "Sucesso!", "Alimento cadastrado", 1);
 					Stage stage = (Stage) nome.getScene().getWindow();
 					stage.close();
 				}else {
-					Main.caixaDeInformacao("Cadastro Não Realizado", "Falha!", "Alimento não cadastrado, dados incorretos", 2);
+					Main.caixaDeInformacao("Cadastro Nï¿½o Realizado", "Falha!", "Alimento nï¿½o cadastrado, dados incorretos", 2);
 				}
 			}else {
-				boolean alterou = cliente.alterarProduto(alimento.getCodigo(), nome.getText(), "Alimento", Double.parseDouble(preco.getText()), Double.parseDouble(peso.getText()), "", "");
+				boolean alterou = cliente.alterarProduto(new Alimento(alimento.getCodigo(), nome.getText(), "Alimento", Double.parseDouble(preco.getText()), Double.parseDouble(peso.getText())));
 				if(alterou) {
-					Main.caixaDeInformacao("Alteração Realizada", "Sucesso!", "Alimento alterado", 1);
+					Main.caixaDeInformacao("Alteraï¿½ï¿½o Realizada", "Sucesso!", "Alimento alterado", 1);
 					Stage stage = (Stage) nome.getScene().getWindow();
 					stage.close();
 				}else {
-					Main.caixaDeInformacao("Alteração Não Realizada", "Falha!", "Alimento não atualizado, dados incorretos", 2);
+					Main.caixaDeInformacao("Alteraï¿½ï¿½o Nï¿½o Realizada", "Falha!", "Alimento nï¿½o atualizado, dados incorretos", 2);
 				}
 			}
 		}else {

@@ -1,15 +1,16 @@
 package controller;
 
-import java.rmi.RemoteException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import models.Produto;
 import models.Roupa;
 import server.Cliente;
+
+import java.rmi.RemoteException;
 
 public class CadastrarRoupasControler {
 
@@ -25,22 +26,22 @@ public class CadastrarRoupasControler {
 	public void adicionarCliente() throws NumberFormatException, RemoteException {
 		if(validacaoDeEntradas()){
 			if(roupa == null) {
-				boolean cadastrou = cliente.adicionarProduto(nome.getText(), "Roupa", Double.parseDouble(preco.getText()), 0, "" , tamanho.getText());
+				boolean cadastrou = cliente.adicionarProduto(new Roupa(Produto.gerarCodigo(), nome.getText(), "Roupa", Double.parseDouble(preco.getText()), tamanho.getText()));
 				if(cadastrou) {
 					Main.caixaDeInformacao("Cadastro Realizado", "Sucesso!", "Roupa cadastrada", 1);
 					Stage stage = (Stage) nome.getScene().getWindow();
 					stage.close();
 				}else {
-					Main.caixaDeInformacao("Cadastro Não Realizado", "Falha!", "Roupa não cadastrada, dados incorretos", 2);
+					Main.caixaDeInformacao("Cadastro Nï¿½o Realizado", "Falha!", "Roupa nï¿½o cadastrada, dados incorretos", 2);
 				}
 			}else {
-				boolean alterou = cliente.alterarProduto(roupa.getCodigo(), nome.getText(), "Roupa", Double.parseDouble(preco.getText()), 0, "", tamanho.getText());
+				boolean alterou = cliente.alterarProduto(new Roupa(roupa.getCodigo(), nome.getText(), "Roupa", Double.parseDouble(preco.getText()), tamanho.getText()));
 				if(alterou) {
-					Main.caixaDeInformacao("Alteração Realizada", "Sucesso!", "Roupa alterada", 1);
+					Main.caixaDeInformacao("Alteraï¿½ï¿½o Realizada", "Sucesso!", "Roupa alterada", 1);
 					Stage stage = (Stage) nome.getScene().getWindow();
 					stage.close();
 				}else {
-					Main.caixaDeInformacao("Alteração Não Realizada", "Falha!", "Roupa não atualizada, dados incorretos", 2);
+					Main.caixaDeInformacao("Alteraï¿½ï¿½o Nï¿½o Realizada", "Falha!", "Roupa nï¿½o atualizada, dados incorretos", 2);
 				}
 			}
 		}else {

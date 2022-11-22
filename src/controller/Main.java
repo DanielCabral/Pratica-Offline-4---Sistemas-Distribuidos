@@ -1,4 +1,5 @@
 package controller;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,9 +8,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-
 public class Main extends Application {
-	private static Stage palco;
+	public static Stage palco;
 	
 	public static Stage getPalco() {
 		return palco;
@@ -21,13 +21,12 @@ public class Main extends Application {
 		setPalco(palco);
 		telaInicial();
 	}
-	
 	public static void telaInicial() {
 		try {
 			Login l=new Login();
 			
 			if(l.getLogou()) {
-				Parent root = FXMLLoader.load(Main.class.getResource("/view/FXMLVBoxMain.fxml"));
+				Parent root = FXMLLoader.load(Main.class.getResource("/view/Test.fxml"));
 				
 				Scene scene = new Scene(root);
 				Image img=new javafx.scene.image.Image("file:icone.png");
@@ -36,7 +35,7 @@ public class Main extends Application {
 				palco.setScene(scene);
 				palco.show();
 			}else {
-				Main.caixaDeInformacao("Login não realizado", "Falha!", "Login falhou, dados incorretos", 2);
+				Main.caixaDeInformacao("Login nï¿½o realizado", "Falha!", "Login falhou, dados incorretos", 2);
 			}
 			
 		}catch (Exception e) {

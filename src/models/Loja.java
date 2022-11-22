@@ -1,22 +1,25 @@
 package models;
 
+import controller.Arquivo;
+
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import controller.Arquivo;
-
 public class Loja implements LojaDistribuida, Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+	Arquivo arquivo = new Arquivo();
+	json.JSONArray jAFunc = new json.JSONArray();
+	json.JSONArray jAProd = new json.JSONArray();
+
 	public boolean adicionarUsuario(String matricula, String cpf, String nome, String salario) throws RemoteException{
 		ArrayList<Funcionario> listaDeUsuarios = new ArrayList<>();
-		String textoCompleto = Arquivo.lerArquivo("src/data/Funcionarios.txt");
+		String textoCompleto = arquivo.lerArquivo("src/data/Funcionarios.txt");
 		
 		json.JSONArray jA = new json.JSONArray(textoCompleto);
 		for (int i = 0; i < jA.length(); i++) {
@@ -31,19 +34,18 @@ public class Loja implements LojaDistribuida, Serializable{
 		for (Funcionario l : listaDeUsuarios) {
 			jsArray.put(l.toJson());
 		}
-		Arquivo.gravarArquivo("src/data/Funcionarios.txt", jsArray);
+		arquivo.gravarArquivo("src/data/Funcionarios.txt", jsArray);
 		
 		return true;
 	}
-	
-	public synchronized boolean logar(String matricula, String cpf) throws RemoteException {
-		String textoCompleto = Arquivo.lerArquivo("src/data/Funcionarios.txt");
-		json.JSONArray jA = new json.JSONArray(textoCompleto);
+
+	public synchronized boolean logar(Funcionario func) throws RemoteException {
+		jAFunc = arquivo.lerArquivoFunc();
 		boolean logou = false;
-		for (int i = 0; i < jA.length(); i++) {
-			Funcionario funcionario= new Funcionario(jA.getJSONObject(i));
+		for (int i = 0; i < jAFunc.length(); i++) {
+			Funcionario funcionario= new Funcionario(jAFunc.getJSONObject(i));
 			
-			if(funcionario.getMatricula().equals(matricula) && funcionario.getCpf().equals(cpf)) {
+			if(funcionario.getMatricula().equals(func.getMatricula()) && funcionario.getCpf().equals(func.getCpf())) {
 				logou = true;
 			}
 		}
@@ -51,46 +53,57 @@ public class Loja implements LojaDistribuida, Serializable{
 	}
 	
 	@Override
-	public synchronized boolean adicionarProduto(String nome, String tipoDeProduto, double preco, double peso, String marca, String tamanho) throws RemoteException {
+	public synchronized boolean adicionarProduto(Alimento produto) throws RemoteException {
 		ArrayList<Produto> listaDeProdutos = new ArrayList<>();
-		String textoCompleto = Arquivo.lerArquivo("src/data/"+tipoDeProduto+"s.txt");
-		
-		json.JSONArray jA = new json.JSONArray(textoCompleto);
-		for (int i = 0; i < jA.length(); i++) {
-			Produto produto= null;
-			if(tipoDeProduto.equals("Alimento")) {
-				produto = new Alimento(jA.getJSONObject(i));
-			}else if(tipoDeProduto.equals("Eletronico")) {
-				produto = new Eletronico(jA.getJSONObject(i));
-			}else {
-				produto = new Roupa(jA.getJSONObject(i));
-			}
-			listaDeProdutos.add(produto);
-			
-		}
-		
-		Produto rc;
-		if(tipoDeProduto.equals("Alimento")) {
-			rc = new Alimento(Produto.gerarCodigo(), nome, tipoDeProduto, preco, peso);
-		}else if(tipoDeProduto.equals("Eletronico")) {
-			rc = new Eletronico(Produto.gerarCodigo(), nome, tipoDeProduto, preco, marca);
-		}else {
-			rc = new Roupa(Produto.gerarCodigo(), nome, tipoDeProduto, preco, tamanho);
-		}
-		listaDeProdutos.add(rc);
-		
-		json.JSONArray jsArray = new json.JSONArray();
+		if(produto.getPreco() < 0 || produto.getPeso() < 0)
+			return false;
+		listaDeProdutos.add(produto);
+
+		jAProd = arquivo.lerArquivoProd("src/data/Alimentos.txt");
 		for (Produto l : listaDeProdutos) {
-			jsArray.put(l.toJson());
+			jAProd.put(l.toJson());
 		}
-		Arquivo.gravarArquivo("src/data/"+tipoDeProduto+"s.txt", jsArray);
+		arquivo.gravarArquivo("src/data/Alimentos.txt", jAProd);
+		return true;
+	}
+
+	@Override
+	public synchronized boolean adicionarProduto(Eletronico produto) throws RemoteException {
+		ArrayList<Produto> listaDeProdutos = new ArrayList<>();
+		if(produto.getPreco() < 0)
+			return false;
+
+		listaDeProdutos.add(produto);
+
+		jAProd = arquivo.lerArquivoProd("src/data/Eletronicos.txt");
+		for (Produto l : listaDeProdutos) {
+			jAProd.put(l.toJson());
+		}
+		arquivo.gravarArquivo("src/data/Eletronicos.txt", jAProd);
+		return true;
+	}
+
+	@Override
+	public synchronized boolean adicionarProduto(Roupa produto) throws RemoteException {
+		ArrayList<Produto> listaDeProdutos = new ArrayList<>();
+		if(produto.getPreco() < 0)
+			return false;
+		listaDeProdutos.add(produto);
+
+		jAProd = arquivo.lerArquivoProd("src/data/Roupas.txt");
+		for (Produto l : listaDeProdutos) {
+			jAProd.put(l.toJson());
+		}
+		arquivo.gravarArquivo("src/data/Roupas.txt", jAProd);
 		return true;
 	}
 	
 	@Override
 	public synchronized boolean apagarProduto(String codigo, String tipoDeProduto) throws RemoteException {
+		if(codigo == null)
+			return false;
 		ArrayList<Produto> listaDeProdutos = new ArrayList<>();
-		String textoCompleto = Arquivo.lerArquivo("src/data/"+tipoDeProduto+"s.txt");
+		String textoCompleto = arquivo.lerArquivo("src/data/"+tipoDeProduto+"s.txt");
 		System.out.println(textoCompleto);
 		json.JSONArray jA = new json.JSONArray(textoCompleto);
 		boolean removeu = false;
@@ -103,7 +116,7 @@ public class Loja implements LojaDistribuida, Serializable{
 			}else {
 				produto = new Roupa(jA.getJSONObject(i));
 			}
-			//Se codigo do produto é igual ao codigo passado, não adiciona a lista.
+			//Se codigo do produto ï¿½ igual ao codigo passado, nï¿½o adiciona a lista.
 			if(produto.codigo.equals(codigo)) {
 				removeu = true;
 			}else {
@@ -111,21 +124,21 @@ public class Loja implements LojaDistribuida, Serializable{
 			}
 		}
 				
-		//Só regravar o arquivo caso o codigo passado exista
+		//Sï¿½ regravar o arquivo caso o codigo passado exista
 		if(removeu) {
 		json.JSONArray jsArray = new json.JSONArray();
 			for (Produto l : listaDeProdutos) {
 				jsArray.put(l.toJson());
 			}
-			Arquivo.gravarArquivo("src/data/"+tipoDeProduto+"s.txt", jsArray);
+			arquivo.gravarArquivo("src/data/"+tipoDeProduto+"s.txt", jsArray);
 		}
-		return true;
+		return removeu;
 	}
 		
 	@Override
 	public synchronized ArrayList<Alimento> listarAlimentos() throws RemoteException {
 		List<Alimento> listaDeProdutos = new ArrayList<>();
-		String textoCompleto = Arquivo.lerArquivo("src/data/Alimentos.txt");
+		String textoCompleto = arquivo.lerArquivo("src/data/Alimentos.txt");
 		System.out.println(textoCompleto);
 		json.JSONArray jA = new json.JSONArray(textoCompleto);
 		
@@ -143,7 +156,7 @@ public class Loja implements LojaDistribuida, Serializable{
 	@Override
 	public synchronized ArrayList<Eletronico> listarEletronicos() throws RemoteException {
 		List<Eletronico> listaDeProdutos = new ArrayList<>();
-		String textoCompleto = Arquivo.lerArquivo("src/data/Eletronicos.txt");
+		String textoCompleto = arquivo.lerArquivo("src/data/Eletronicos.txt");
 		json.JSONArray jA = new json.JSONArray(textoCompleto);
 		
 		for (int i = 0; i < jA.length(); i++) {
@@ -160,7 +173,7 @@ public class Loja implements LojaDistribuida, Serializable{
 	@Override
 	public synchronized ArrayList<Roupa> listarRoupas() throws RemoteException {
 		List<Roupa> listaDeProdutos = new ArrayList<>();
-		String textoCompleto = Arquivo.lerArquivo("src/data/Roupas.txt");
+		String textoCompleto = arquivo.lerArquivo("src/data/Roupas.txt");
 		json.JSONArray jA = new json.JSONArray(textoCompleto);
 		
 		for (int i = 0; i < jA.length(); i++) {
@@ -177,7 +190,10 @@ public class Loja implements LojaDistribuida, Serializable{
 	@Override
 	public synchronized ArrayList<Alimento> pesquisarAlimento(String nome) throws RemoteException {
 		List<Alimento> listaDeProdutos = new ArrayList<>();
-		String textoCompleto = Arquivo.lerArquivo("src/data/Alimentos.txt");
+		if(nome == null || nome.equals(""))
+			return null;
+
+		String textoCompleto = arquivo.lerArquivo("src/data/Alimentos.txt");
 		json.JSONArray jA = new json.JSONArray(textoCompleto);
 		
 		for (int i = 0; i < jA.length(); i++) {
@@ -186,7 +202,6 @@ public class Loja implements LojaDistribuida, Serializable{
 			alimento = new Alimento(jA.getJSONObject(i));
 
 			if(alimento.getNome().startsWith(nome)) {
-				System.out.println("ok");
 				listaDeProdutos.add(alimento);
 			}
 		}
@@ -197,17 +212,18 @@ public class Loja implements LojaDistribuida, Serializable{
 	@Override
 	public synchronized ArrayList<Eletronico> pesquisarEletronico(String nome) throws RemoteException {
 		List<Eletronico> listaDeProdutos = new ArrayList<>();
-		String textoCompleto = Arquivo.lerArquivo("src/data/Eletronicos.txt");
+		if(nome == null || nome.equals(""))
+			return null;
+		String textoCompleto = arquivo.lerArquivo("src/data/Eletronicos.txt");
 		json.JSONArray jA = new json.JSONArray(textoCompleto);
 		
 		for (int i = 0; i < jA.length(); i++) {
-			Eletronico alimento= null;
-			
-			alimento = new Eletronico(jA.getJSONObject(i));
+			Eletronico eletronico= null;
 
-			if(alimento.getNome().startsWith(nome)) {
-				System.out.println("ok");
-				listaDeProdutos.add(alimento);
+			eletronico = new Eletronico(jA.getJSONObject(i));
+
+			if(eletronico.getNome().startsWith(nome)) {
+				listaDeProdutos.add(eletronico);
 			}
 		}
 		Collections.sort(listaDeProdutos);
@@ -217,17 +233,18 @@ public class Loja implements LojaDistribuida, Serializable{
 	@Override
 	public synchronized ArrayList<Roupa> pesquisarRoupa(String nome) throws RemoteException {
 		List<Roupa> listaDeProdutos = new ArrayList<>();
-		String textoCompleto = Arquivo.lerArquivo("src/data/Roupas.txt");
+		if(nome == null || nome.equals(""))
+			return null;
+		String textoCompleto = arquivo.lerArquivo("src/data/Roupas.txt");
 		json.JSONArray jA = new json.JSONArray(textoCompleto);
 		
 		for (int i = 0; i < jA.length(); i++) {
-			Roupa alimento= null;
-			
-			alimento = new Roupa(jA.getJSONObject(i));
+			Roupa roupa= null;
 
-			if(alimento.getNome().startsWith(nome)) {
-				System.out.println("ok");
-				listaDeProdutos.add(alimento);
+			roupa = new Roupa(jA.getJSONObject(i));
+
+			if(roupa.getNome().startsWith(nome)) {
+				listaDeProdutos.add(roupa);
 			}
 		}
 		Collections.sort(listaDeProdutos);
@@ -235,63 +252,96 @@ public class Loja implements LojaDistribuida, Serializable{
 	}
 	
 	@Override
-	public synchronized boolean alterarProduto(String codigo, String nome, String tipoDeProduto, double preco, double peso, String marca, String tamanho) throws RemoteException {
+	public synchronized boolean alterarProduto(Alimento produto) throws RemoteException {
+		if(produto.getCodigo() == null)
+			return false;
 		ArrayList<Produto> listaDeProdutos = new ArrayList<>();
-		String textoCompleto = Arquivo.lerArquivo("src/data/"+tipoDeProduto+"s.txt");
-		System.out.println(textoCompleto);
-		json.JSONArray jA = new json.JSONArray(textoCompleto);
-		for (int i = 0; i < jA.length(); i++) {
-			Produto produto= null;
-			if(tipoDeProduto.equals("Alimento")) {
-				produto = new Alimento(jA.getJSONObject(i));
-			}else if(tipoDeProduto.equals("Eletronico")) {
-				produto = new Eletronico(jA.getJSONObject(i));
-			}else {
-				produto = new Roupa(jA.getJSONObject(i));
-			}
-			if(produto.codigo.equals(codigo)) {
-				Produto rc;
-				if(tipoDeProduto.equals("Alimento")) {
-					rc = new Alimento(codigo, nome, tipoDeProduto, preco, peso);
-				}else if(tipoDeProduto.equals("Eletronico")) {
-					rc = new Eletronico(codigo, nome, tipoDeProduto, preco, marca);
-				}else {
-					rc = new Roupa(codigo, nome, tipoDeProduto, preco, tamanho);
-				}
-				listaDeProdutos.add(rc);
-			}else {
+		jAProd = arquivo.lerArquivoProd("src/data/Alimentos.txt");
+		for (int i = 0; i < jAProd.length(); i++) {
+				Produto produtoTemp = new Alimento(jAProd.getJSONObject(i));
+			if(produto.getCodigo().equals(produtoTemp.getCodigo())) {
 				listaDeProdutos.add(produto);
+			}else {
+				listaDeProdutos.add(produtoTemp);
 			}
 		}
-				
-		
-		
+
 		json.JSONArray jsArray = new json.JSONArray();
 		for (Produto l : listaDeProdutos) {
 			jsArray.put(l.toJson());
 		}
-		Arquivo.gravarArquivo("src/data/"+tipoDeProduto+"s.txt", jsArray);
+
+		arquivo.gravarArquivo("src/data/Alimentos.txt", jsArray);
 		return true;
 	}
+
+	@Override
+	public synchronized boolean alterarProduto(Eletronico produto) throws RemoteException {
+		if(produto.getCodigo() == null)
+			return false;
+		ArrayList<Produto> listaDeProdutos = new ArrayList<>();
+		jAProd = arquivo.lerArquivoProd("src/data/Eletronicos.txt");
+		for (int i = 0; i < jAProd.length(); i++) {
+			Produto produtoTemp = new Eletronico(jAProd.getJSONObject(i));
+			if(produto.getCodigo().equals(produtoTemp.getCodigo())) {
+				listaDeProdutos.add(produto);
+			}else {
+				listaDeProdutos.add(produtoTemp);
+			}
+		}
+
+		json.JSONArray jsArray = new json.JSONArray();
+		for (Produto l : listaDeProdutos) {
+			jsArray.put(l.toJson());
+		}
+
+		arquivo.gravarArquivo("src/data/Eletronicos.txt", jsArray);
+		return true;
+	}
+
+	@Override
+	public synchronized boolean alterarProduto(Roupa produto) throws RemoteException {
+		if(produto.getCodigo() == null)
+			return false;
+		ArrayList<Produto> listaDeProdutos = new ArrayList<>();
+		jAProd = arquivo.lerArquivoProd("src/data/Roupas.txt");
+		for (int i = 0; i < jAProd.length(); i++) {
+			Produto produtoTemp = new Roupa(jAProd.getJSONObject(i));
+			if(produto.getCodigo().equals(produtoTemp.getCodigo())) {
+				listaDeProdutos.add(produto);
+			}else {
+				listaDeProdutos.add(produtoTemp);
+			}
+		}
+
+		json.JSONArray jsArray = new json.JSONArray();
+		for (Produto l : listaDeProdutos) {
+			jsArray.put(l.toJson());
+		}
+
+		arquivo.gravarArquivo("src/data/Roupas.txt", jsArray);
+		return true;
+	}
+
 	
 	@Override
 	public synchronized int exibirQuantidade() throws RemoteException {
 		ArrayList<Produto> listaDeProdutos = new ArrayList<>();
-		String textoCompleto = Arquivo.lerArquivo("src/data/Alimentos.txt");
+		String textoCompleto = arquivo.lerArquivo("src/data/Alimentos.txt");
 		json.JSONArray jA = new json.JSONArray(textoCompleto);
 		for (int i = 0; i < jA.length(); i++) {
 			Produto produto = new Produto(jA.getJSONObject(i));
 			listaDeProdutos.add(produto);
 		}
 		
-		textoCompleto = Arquivo.lerArquivo("src/data/Eletronicos.txt");
+		textoCompleto = arquivo.lerArquivo("src/data/Eletronicos.txt");
 		jA = new json.JSONArray(textoCompleto);
 		for (int i = 0; i < jA.length(); i++) {
 			Produto produto = new Produto(jA.getJSONObject(i));
 			listaDeProdutos.add(produto);
 		}
 		
-		textoCompleto = Arquivo.lerArquivo("src/data/Roupas.txt");
+		textoCompleto = arquivo.lerArquivo("src/data/Roupas.txt");
 		jA = new json.JSONArray(textoCompleto);
 		for (int i = 0; i < jA.length(); i++) {
 			Produto produto = new Produto(jA.getJSONObject(i));

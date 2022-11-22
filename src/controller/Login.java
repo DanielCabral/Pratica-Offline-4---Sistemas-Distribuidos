@@ -1,23 +1,20 @@
 package controller;
 
-import java.rmi.RemoteException;
-import java.util.Optional;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+import models.Funcionario;
 import server.Cliente;
+
+import java.rmi.RemoteException;
+import java.util.Optional;
 
 public class Login extends Application{
 	Cliente c = new Cliente();
@@ -81,7 +78,8 @@ public class Login extends Application{
 				try {
 					String matricula = usernamePassword.getKey();
 					String cpf = usernamePassword.getValue();
-					logou = c.logar(matricula, cpf);
+					Funcionario funcionario = new Funcionario(matricula, cpf);
+					logou = c.logar(funcionario);
 				} catch (RemoteException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

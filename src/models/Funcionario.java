@@ -13,6 +13,12 @@ public class Funcionario implements Serializable{
 	private String cpf;
 	private String nome;
 	private String salario;
+
+	public Funcionario(String matricula, String cpf) {
+		super();
+		this.matricula = matricula;
+		this.cpf = cpf;
+	}
 	public Funcionario(String matricula, String cpf, String nome, String salario) {
 		super();
 		this.matricula = matricula;

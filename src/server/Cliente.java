@@ -1,7 +1,8 @@
 package server;
 
 
-import java.awt.Robot;
+import models.*;
+
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -9,12 +10,6 @@ import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import models.Alimento;
-import models.Eletronico;
-import models.LojaDistribuida;
-import models.Produto;
-import models.Roupa;
 
 public class Cliente {
 	private static String nomeServidor = "127.0.0.1";
@@ -34,24 +29,40 @@ public class Cliente {
 		}
 	}
 	
-	public synchronized boolean logar(String matricula, String cpf) throws RemoteException{
-		return stub.logar(matricula, cpf);
+	public synchronized boolean logar(Funcionario func) throws RemoteException{
+		return stub.logar(func);
 	}
 	
 	public boolean adicionarUsuario(String matricula, String cpf, String nome, String salario) throws RemoteException{
 		return stub.adicionarUsuario(matricula, cpf, nome, salario);
 	}
 	
-	public boolean adicionarProduto (String nome, String tipoDeProduto, double preco,double peso, String marca, String tamanho) throws RemoteException{
-		return stub.adicionarProduto(nome, tipoDeProduto, preco, peso, marca, tamanho);
+	public boolean adicionarProduto (Alimento produto) throws RemoteException{
+		return stub.adicionarProduto(produto);
+	}
+
+	public boolean adicionarProduto (Eletronico produto) throws RemoteException{
+		return stub.adicionarProduto(produto);
+	}
+
+	public boolean adicionarProduto (Roupa produto) throws RemoteException{
+		return stub.adicionarProduto(produto);
 	}
 	
 	public boolean apagarProduto (String codigo, String tipoDeProduto) throws RemoteException{
 		return stub.apagarProduto(codigo, tipoDeProduto);
 	}
 	
-	public boolean alterarProduto (String codigo, String nome, String tipoDeProduto, double preco, double peso, String marca, String tamanho) throws RemoteException{
-		return stub.alterarProduto(codigo, nome, tipoDeProduto, preco, peso, marca, tamanho);
+	public boolean alterarProduto (Alimento produto) throws RemoteException{
+		return stub.alterarProduto(produto);
+	}
+
+	public boolean alterarProduto (Eletronico produto) throws RemoteException{
+		return stub.alterarProduto(produto);
+	}
+
+	public boolean alterarProduto (Roupa produto) throws RemoteException{
+		return stub.alterarProduto(produto);
 	}
 	
 	public ArrayList<Alimento> pesquisarAlimento(String nome) throws RemoteException {

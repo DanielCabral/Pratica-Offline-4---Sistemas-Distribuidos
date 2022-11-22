@@ -1,5 +1,7 @@
 package controller;
 
+import json.JSONArray;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,8 +11,56 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 public class Arquivo {
-	
-public static String lerArquivo(String caminho) {
+
+
+	public JSONArray lerArquivoFunc() {
+		String caminho = "src/data/Funcionarios.txt";
+		FileInputStream arquivo;
+		String linha;
+		String textoCompleto = "";
+		try {
+			arquivo = new FileInputStream(caminho);
+			InputStreamReader input = new InputStreamReader(arquivo);
+			BufferedReader br = new BufferedReader(input);
+			do {
+				linha = br.readLine();
+				if (linha != null) {
+					textoCompleto = textoCompleto + " " + linha;
+				}
+			} while (linha != null);
+			// System.out.println(textoCompleto);
+			br.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new JSONArray(textoCompleto);
+	}
+
+	public JSONArray lerArquivoProd(String caminho) {
+		FileInputStream arquivo;
+		String linha;
+		String textoCompleto = "";
+		try {
+			arquivo = new FileInputStream(caminho);
+			InputStreamReader input = new InputStreamReader(arquivo);
+			BufferedReader br = new BufferedReader(input);
+			do {
+				linha = br.readLine();
+				if (linha != null) {
+					textoCompleto = textoCompleto + " " + linha;
+				}
+			} while (linha != null);
+			// System.out.println(textoCompleto);
+			br.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new JSONArray(textoCompleto);
+	}
+
+public String lerArquivo(String caminho) {
 	FileInputStream arquivo;
 	String linha;
 	String textoCompleto = "";
@@ -32,7 +82,7 @@ public static String lerArquivo(String caminho) {
 	}
 	return textoCompleto;
 }
-public static void gravarArquivo(String caminho,json.JSONArray jsArray) {
+public void gravarArquivo(String caminho,json.JSONArray jsArray) {
 	FileOutputStream arquivoEscrever;
 	try {
 		arquivoEscrever = new FileOutputStream(caminho);
@@ -45,7 +95,7 @@ public static void gravarArquivo(String caminho,json.JSONArray jsArray) {
 		e.printStackTrace();
 	}
 }
-public static void gravarArquivoTexto(String caminho,String texto) {
+public void gravarArquivoTexto(String caminho,String texto) {
 	FileOutputStream arquivoEscrever;
 	try {
 		arquivoEscrever = new FileOutputStream(caminho);
