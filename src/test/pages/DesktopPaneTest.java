@@ -1,12 +1,12 @@
 package test.pages;
 
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.testfx.framework.junit.ApplicationTest;
 
-public class DesktopPaneTest extends Application {
+public class DesktopPaneTest extends ApplicationTest {
     @Override
     public void start(Stage stage) {
         try {
